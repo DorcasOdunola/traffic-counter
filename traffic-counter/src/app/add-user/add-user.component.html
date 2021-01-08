@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 bg-white">
+            <div class="row p-md-5 mt-md-2">
+                <div class="col-12 col-md-8 mx-auto shadow-sm p-md-5">
+                    <p class="display-4 text-center">ADD USER</p>
+                    <form [formGroup]="userForm">
+                        <div class="d-md-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Surname:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="surname">
+                            </mat-form-field>
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-5">
+                                <mat-label>First Name:</mat-label>
+                                <input type="text" name="firstName" matInput placeholder="" formControlName="firstName"> 
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="d-md-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Last Name:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="lastName">
+                            </mat-form-field>
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-5">
+                                <mat-label>Email:</mat-label>
+                                <input type="email" matInput placeholder="" formControlName="email">
+                            </mat-form-field>
+                        </div>
+            
+                        <div class="d-md-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Phone Number:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="phoneNo">
+                            </mat-form-field>
+            
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-5">
+                                <mat-label>Address</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="address">
+                            </mat-form-field>
+                        </div>
+                        <div class="d-md-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Status</mat-label>
+                                <mat-select name="status" formControlName="status">
+                                    <mat-option value="Admin">Admin</mat-option>
+                                    <mat-option value="User">User</mat-option>
+                                </mat-select>  
+                            </mat-form-field>
+                            <div class="w-100 ml-md-5" style="margin-top: -2.6%;">
+                                <!-- <ng-select formControlName="unitId">
+                                    <ng-option *ngFor="let unit of unitArray" [value]="unit.unit_id">
+                                        <span>{{unit.name}}</span>
+                                        <small class="text-muted float-right"><i>{{unit.status}}</i></small>
+                                    </ng-option>
+                                </ng-select> -->
+
+                                <ng-select [items]="unitArray"
+                                formControlName="unitId"
+                                bindLabel="Select Unit"
+                                bindValue="unit_id"
+                                placeholder="Select Unit">
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <div>{{item.name}}</div>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <div>
+                                            <span>{{item.name}}</span>
+                                            <small class="text-muted float-right"><i>{{item.status}}</i></small>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <!-- <mat-form-field appearance="legacy" class="w-100 ml-md-5">
+                                <mat-label>Unit</mat-label>
+                                <mat-select name="unitId" formControlName="unitId">
+                                    <div *ngFor="let unit of unitArray">
+                                        <mat-option value={{unit.unit_id}}>
+                                            <span>{{unit.name}}</span>
+                                            <small class="text-muted float-right"><i>{{unit.status}}</i></small>
+                                        </mat-option>
+                                    </div>
+                                </mat-select>  
+                            </mat-form-field> -->
+                        </div>
+                        <div class="d-md-flex">            
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="" formControlName="password">
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button color="accent" class="mb-2" (click)="addUser()">Submit</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+

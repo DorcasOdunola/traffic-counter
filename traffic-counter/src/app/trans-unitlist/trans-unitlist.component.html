@@ -1,0 +1,10 @@
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 mt-2 border-bottom" *ngFor="let unit of unitArray" style="cursor: pointer" (click)="updateUnitId(unit.unit_id, unit.name)">
+            <div class="pl-3 p-2">
+                <span>{{unit.name}}</span>
+                <span class="float-right text-muted"><small>{{unit.status}}</small></span>
+            </div>
+        </div>
+    </div>
+</div>

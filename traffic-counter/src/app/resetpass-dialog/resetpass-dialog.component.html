@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>New Password</mat-label>
+                    <input type="password" matInput placeholder="" [(ngModel)]="password">
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Confirm New Password</mat-label>
+                    <input type="password" matInput placeholder="" [(ngModel)]="conpassword">
+                </mat-form-field>
+                <p class="text-danger">{{info}}</p>
+
+                <div class="row mx-auto justify-content-end">
+                    <button mat-raised-button mat-dialog-close>Cancel</button>
+                    <button mat-raised-button mat-dialog-close class="ml-3" (click)="sendPassword()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

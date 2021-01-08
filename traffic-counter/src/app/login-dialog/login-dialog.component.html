@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div>
+        <h1>Welcome!!!</h1>
+        <div>
+            <p>You have successfully create {{this.dataObj.unitName}} Unit and add {{this.dataObj.userName}} to the unit as an admin.</p>
+            <p>{{this.dataObj.userName}}, your userID is {{this.dataObj.unitInitial}} {{this.dataObj.userId}}</p>
+            <small>Kindly Sign In</small>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button accent="primary" (click)="login()">Sign In</button>
+        </div>
+    </div>
+</div>

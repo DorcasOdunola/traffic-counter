@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+.mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+  /* color: rgba(0,0,0,.54); */
+  color: white !important;
+}

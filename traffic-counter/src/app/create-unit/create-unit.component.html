@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 border rounded bg-white">
+            <div class="row p-md-5 mt-md-5">
+                <div class="col-12 col-md-6 shadow-sm mx-auto p-md-5">
+                    <p class="h3 text-center">ADD UNIT</p>
+                    <form>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Name</mat-label>
+                            <input type="text" name="unitName" matInput placeholder="" [(ngModel)]="unitName">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Address</mat-label>
+                            <input type="text" name="unitAddress" matInput placeholder="" [(ngModel)]="unitAddress">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Initials</mat-label>
+                            <input type="text" name="unitInitial" matInput placeholder="" [(ngModel)]="unitInitial">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Status(Central or Sub-Unit)</mat-label>
+                            <mat-select name="unitStatus" [(ngModel)]="unitStatus">
+                                <mat-option value="Central Unit">Central Unit</mat-option>
+                                <mat-option value="Sub-Unit">Sub-Unit</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="createUnit()" class="mb-3">ADD UNIT</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

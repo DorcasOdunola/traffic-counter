@@ -1,0 +1,48 @@
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.myFont {
+  font-size: 10pt !important;
+  color: white !important;
+}
+
+.smallFont {
+  font-size: 9pt !important;
+  color: white !important;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mynav {
+  float: right !important;
+}
+
+.mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+  /* color: rgba(0,0,0,.54); */
+  color: white !important;
+}
+
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+  padding: 0% !important;
+}
+
+.active {
+  /* background-color: white; */
+  /* color: silver !important; */
+  font-weight: bolder;
+  color: brown !important;
+}

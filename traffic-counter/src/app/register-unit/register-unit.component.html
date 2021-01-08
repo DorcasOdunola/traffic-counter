@@ -1,0 +1,116 @@
+<div class="container-fluid bg-light p-2" style="height: 100vh;">
+    <div class="row w-100 mt-md-5">
+        <div class="col-12 col-md-6 bg-white my-auto mx-auto mt-md-4 p-md-4">
+            <mat-progress-bar mode="indeterminate" *ngIf="progressbar"></mat-progress-bar>
+           <div>
+            <p class="display-4 text-center pt-md-3">TFC</p>
+            <p class="h5 initialism text-center">Unit Registration</p>
+           </div>
+            <mat-horizontal-stepper [linear]="isLinear">
+                <mat-step [stepControl]="unitForm">
+                    <form [formGroup]="unitForm">
+                        <ng-template matStepLabel>Register your unit</ng-template>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Name</mat-label>
+                            <input type="text" name="unitName" matInput placeholder="" formControlName="unitName">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Address</mat-label>
+                            <input type="text" name="unitAddress" matInput placeholder="" formControlName="unitAddress">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Initials</mat-label>
+                            <input type="text" name="unitInitial" matInput placeholder="" formControlName="unitInitial">
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Unit Status(Central or Sub-Unit)</mat-label>
+                            <mat-select name="unitStatus" formControlName="unitStatus">
+                                <mat-option value="Central Unit">Central Unit</mat-option>
+                                <mat-option value="Sub-Unit">Sub-Unit</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button color="primary" matStepperNext>Next</button>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="unitForm">
+                    <form [formGroup]="userForm">
+                        <ng-template matStepLabel>Create User</ng-template>
+                        <div class="d-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Surname:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="surname">
+                            </mat-form-field>
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>First Name:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="firstName">
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="d-flex">
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>Middle Name:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="lastName">
+                            </mat-form-field>    
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>Email:</mat-label>
+                                <input type="email" matInput placeholder="" formControlName="email">
+                            </mat-form-field>
+                        </div>
+    
+                        <div class="d-flex">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Phone Number:</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="phoneNo">
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>Address</mat-label>
+                                <input type="text" matInput placeholder="" formControlName="address">
+                            </mat-form-field>
+                        </div>
+                        <div class="d-flex">
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="" formControlName="password">
+                            </mat-form-field>
+                            <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                                <mat-label>Confirm Password</mat-label>
+                                <input type="password" matInput placeholder="" formControlName="conpassword">
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="createUnit()">Submit</button>
+                    </form>
+                </mat-step>
+            </mat-horizontal-stepper>
+            
+            <!-- <div class="bg-white shadow-sm" style="height: 70vh;">
+                
+                <form class="form-group p-md-5">
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Unit Name</mat-label>
+                        <input type="text" name="unitName" matInput placeholder="Lautech Unit" [(ngModel)]="unitName">
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Unit Address</mat-label>
+                        <input type="text" name="unitAddress" matInput placeholder="......." [(ngModel)]="unitAddress">
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Unit Initials</mat-label>
+                        <input type="text" name="unitInitial" matInput placeholder="Laut" [(ngModel)]="unitInitial">
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Unit Status(Central or Sub-Unit)</mat-label>
+                        <mat-select name="unitStatus" [(ngModel)]="unitStatus">
+                            <mat-option value="Central Unit">Central Unit</mat-option>
+                            <mat-option value="Sub-Unit">Sub-Unit</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="row mx-auto justify-content-center">
+                        <button mat-raised-button color="primary" (click)="createUnit()">Register</button>
+                    </div>
+                </form>
+            </div> -->
+        </div>
+    </div>
+</div>
+

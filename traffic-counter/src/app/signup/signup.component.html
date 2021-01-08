@@ -1,0 +1,53 @@
+<div class="container-fluid bg-light p-2" style="height: 100vh;">
+    <div class="row w-100 mt-md-5">
+        <div class="col-12 col-md-5 my-auto mx-auto  p-md-5">
+            <div class="bg-white shadow-sm">
+                <div class="bg-light">
+                    <p class="display-4 text-center pt-md-3">TFC</p>
+                    <p class="h5 initialism text-center mt-md-3 mb-md-3">Signup</p>
+                </div>
+                <form class="form-group p-md-5" [formGroup]='userForm' (ngSubmit)="createUser()">
+                    <div class="d-flex">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>First Name:</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="firstName">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                            <mat-label>Last Name:</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="lastName">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Surname:</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="surname">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                            <mat-label>Email:</mat-label>
+                            <input type="email" matInput placeholder="" formControlName="email">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Phone Number:</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="phoneNo">
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="legacy" class="w-100 ml-md-1">
+                            <mat-label>Address</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="address">
+                        </mat-form-field>
+                    </div>
+                    <div class="row mx-auto justify-content-center">
+                        <button mat-raised-button color="primary">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

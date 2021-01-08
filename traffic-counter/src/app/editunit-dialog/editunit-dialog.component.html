@@ -1,0 +1,27 @@
+<div>
+    <form>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Unit Name</mat-label>
+            <input type="text" name="unitName" matInput placeholder="" [(ngModel)]="unitName">
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Unit Address</mat-label>
+            <input type="text" name="unitAddress" matInput placeholder="" [(ngModel)]="unitAddress">
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Unit Initials</mat-label>
+            <input type="text" name="unitInitial" matInput placeholder="" [(ngModel)]="unitInitial">
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Unit Status(Central or Sub-Unit)</mat-label>
+            <mat-select name="unitStatus" [(ngModel)]="unitStatus">
+                <mat-option value="Central Unit">Central Unit</mat-option>
+                <mat-option value="Sub-Unit">Sub-Unit</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-dialog-actions class="justify-content-end">
+            <button mat-raised-button mat-dialog-close>Close</button>  
+            <button mat-raised-button class="ml-3" (click)="saveUnit()">Save</button>
+        </mat-dialog-actions>
+    </form>
+</div>

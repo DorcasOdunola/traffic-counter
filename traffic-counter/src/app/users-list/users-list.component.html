@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="!seen">
+    <div class="col-3 mx-auto">
+      <p class="display-4 text-center">LOADING.....</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="seen">
+    <div class="col-12 col-md-6 mx-auto">
+      <input type="text" class="form-control mt-2" placeholder="Search Staff" [(ngModel)]="userSearch">
+    </div>
+  </div> 
+  <div class="row mt-4 p-0">
+        <div class="col-12 mb-3" *ngFor="let user of userArray | searchUser:userSearch">
+          <mat-card class="bg-white p-0">
+            <mat-card-content>
+              <div class="row w-100 text-muted">
+                <div class="col-6 col-md-4 d-flex mx-auto">
+                    <!-- <p>{{user.image}}ndhdhdh</p> -->
+                    <!-- http://localhost/trafficCounter/backend/uploadds -->
+                  <img src="http://localhost/trafficCounter/backend/uploads/{{user.image}}" onerror="this.src='assets/profilepicture.png'" style="width: 50px; height: 50px" class="mt-3 ml-1 rounded-circle" alt="" >
+                  <div class="p-3 mt-2">
+                    <span class="h5 initialism"><b>{{user.surname}}</b></span><br>
+                    <small>{{user.first_name}}</small>
+                    <small> {{user.last_name}}</small>
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 text-center">
+                  <div class="mt-md-3">
+                    <span>{{user.email}}</span><br>
+                    <span> {{user.phone_number}}</span><br>
+                    <span> {{user.address}}</span><br>
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 text-center">
+                  <div class="mt-md-3">
+                    <span><b>{{user.user_status}}</b></span><br>
+                    <span> {{user.unit_name}}</span><br>
+                  </div>
+                </div>
+                <div class="col-12 col-md-2 text-center">
+                  <mat-card-actions class="mt-md-3">
+                      <button mat-raised-button  class="text-primary" style="font-size: 12pt;" (click)="editUser(user.user_id, user.surname, user.first_name, user.last_name, user.email, user.address, user.user_status, user.phone_number, user.unit_id)">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button mat-raised-button class="text-danger" (click)="deleteUser(user.user_id)" style="font-size: 12pt;"><i class="fas fa-trash-alt"></i></button>
+                  </mat-card-actions>
+                </div>
+              </div>
+            </mat-card-content>
+        </mat-card>
+        </div>
+  </div>
+
+</div>
+ 

@@ -1,0 +1,11 @@
+.table {
+    border: none !important;
+}
+
+tr {
+    border-top: 2px solid white;
+}
+
+input {
+    box-shadow: none !important;
+}

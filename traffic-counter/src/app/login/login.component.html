@@ -1,0 +1,24 @@
+<div class="container-fluid bg-light p-2" style="height: 100vh;">
+    <div class="row w-100 mt-md-5">
+        <div class="col-11 col-md-4 mx-auto mt-5 p-md-5">
+            <div class="bg-white shadow-sm" style="height: 60vh;">
+                <p class="display-4 text-center pt-3">TFC</p>
+                <p class="h5 initialism text-center">Login</p>
+                <form class="form-group p-5 p-md-5">
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input type="text" name="email" matInput placeholder="your registerd email" [(ngModel)]="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input type="password" name="password" matInput placeholder="password" [(ngModel)]="password">
+                    </mat-form-field>
+                    <p class="text-danger text-center">{{incorrect}}</p>
+                    <div class="row mx-auto justify-content-center">
+                        <button mat-raised-button color="primary" (click)="login()">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

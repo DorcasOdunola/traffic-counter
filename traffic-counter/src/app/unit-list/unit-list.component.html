@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="!seen">
+    <div class="col-3 mx-auto">
+      <p class="display-4 text-center">LOADING.....</p>
+    </div>
+  </div>
+    <div class="row" *ngIf="seen">
+      <div class="col-12 col-md-6 border-top-0 mx-auto">
+        <input type="text" class="form-control mt-2" placeholder="Search Unit" [(ngModel)]="unitSearch">
+      </div>
+    </div>
+    <table class="table table-md-responsive">
+      <thead>
+        <tr class="">
+          <th class="">Unit Name</th>
+          <th class="">Unit Address</th>
+          <th class="">Unit Initials</th>
+          <th class="">Unit Status</th>
+          <th class="">Edit</th> 
+          <th class="">Delete</th> 
+        </tr>
+      </thead>
+      <tbody class="" *ngFor="let unit of unitArray | searchUnit: unitSearch">
+          <tr class="shadow-sm rounded mt-2">
+            <td>{{unit.name}}</td>
+            <td>{{unit.address}}</td>
+            <td>{{unit.initials}}</td>
+            <td>{{unit.status}}</td>
+            <td><button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status)">
+              <i class="fas fa-edit"></i>
+            </button></td>
+            <td><button mat-raised-button class="text-danger" (click)="deleteUnit(unit.unit_id)"><i class="fas fa-trash"></i></button></td>
+          </tr>
+      </tbody>
+    </table>
+    <!-- <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-2 text-center mx-auto"><span><b>Unit Name</b></span></div>
+              <div class="col-2 text-center mx-auto"> <span><b>Unit Address</b></span></div>
+              <div class="col-2 text-center mx-auto"> <span><b>Unit Initials</b></span></div>
+              <div class="col-2 text-center mx-auto"> <span><b>Unit Status</b></span></div>
+              <div class="col-2 text-center mx-auto"> <span><b>Edit</b></span></div> 
+              <div class="col-2 text-center mx-auto"> <span><b>Delete</b></span></div>              
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div> -->
+    <!-- <div class="row mt-4 p-0">
+          <div class="col-12 mb-3" *ngFor="let unit of unitArray | searchUnit: unitSearch">
+            <mat-card class="bg-white p-0">
+              <mat-card-content>
+                <div class="row w-100 text-muted">
+                  <div class="col-12 col-md-2 mx-auto text-center">
+                    <div class="mt-md-3">
+                        <span>{{unit.name}}</span><br>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mx-auto text-center">
+                    <div class="mt-md-3">
+                        <span>{{unit.address}}</span><br>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mx-auto text-center">
+                    <div class="mt-md-3">
+                        <span>{{unit.initials}}</span><br>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mx-auto text-center">
+                    <div class="mt-md-3">
+                        <span>{{unit.status}}</span><br>
+                    </div>
+                  </div>
+                  <div class="col-2 mx-auto text-center">
+                    <mat-card-actions>
+                      <button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status)">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </mat-card-actions>
+                  </div>
+                  <div class="col-2 mx-auto text-center">
+                    <mat-card-actions>
+                      <button mat-raised-button class="text-danger" (click)="deleteUnit(unit.unit_id)"><i class="fas fa-trash"></i></button>
+                    </mat-card-actions>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+          </div>
+    </div> -->
+</div>
+   

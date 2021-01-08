@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <div class="">
+                    <mat-form-field appearance="legacy" class="w-100">
+                        <mat-label>Transport Means</mat-label>
+                        <input type="text" name="transName" matInput placeholder="" [(ngModel)]="transName">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Transport Description</mat-label>
+                        <textarea matInput name="transDesc" [(ngModel)]="transDesc"></textarea>
+                    </mat-form-field>
+                </div>
+                <mat-dialog-actions class="justify-content-end">
+                    <button mat-raised-button mat-dialog-close>Close</button>  
+                    <button mat-raised-button class="ml-3" (click)="editTransport()">Save</button>
+                </mat-dialog-actions>
+            </form>
+        </div>
+    </div>
+</div>
