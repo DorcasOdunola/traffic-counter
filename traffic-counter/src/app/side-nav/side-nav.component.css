@@ -44,5 +44,16 @@
   /* background-color: white; */
   /* color: silver !important; */
   font-weight: bolder;
-  color: brown !important;
+  color: aqua !important;
+}
+
+a:hover {
+  color: aqua !important;
+}
+.myhover {
+  color: rgba(4,4,44, 1) !important;
+}
+.myhover:hover {
+  /* background-color: rgba(4,4,44, 1) !important; */
+  /* color: brown !important; */
 }

@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div>
-        <h1>Welcome!!!</h1>
+        <h1>Welcome {{this.dataObj.userName}}!!!</h1>
         <div>
-            <p>You have successfully create {{this.dataObj.unitName}} Unit and add {{this.dataObj.userName}} to the unit as an admin.</p>
-            <p>{{this.dataObj.userName}}, your userID is {{this.dataObj.unitInitial}} {{this.dataObj.userId}}</p>
+            <p>You have successfully create <b>{{this.dataObj.unitName}} Unit</b> and add <b>{{this.dataObj.userName}}</b> to the unit as an admin.</p>
+            <p><b>{{this.dataObj.userName}}</b>, your userID is <b>{{this.dataObj.unitInitial}} {{this.dataObj.userId}}</b></p>
             <small>Kindly Sign In</small>
         </div>
         <div mat-dialog-actions>

@@ -82,21 +82,12 @@
             $stmt = $this->con->prepare($query);
             $check = false;
             foreach ($items as $item) {
-                // $bind_value = array($binder, ...$items);
                 $stmt->bind_param($binder, ...$item);
                 if($stmt->execute()){
                     $check = true;
                 }
             }
-            // echo json_encode($stmt);
-            return $check;
-            // if ($don) {
-
-            //    return true;
-            // } else {
-            //    return false;
-            
-            
+            return $check;            
         }
 
     }

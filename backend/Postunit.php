@@ -32,18 +32,6 @@
         ];
         $transport = new Transport;
         $insertTransports = $transport->multiInsertTransport($allTransport);  //insert transports
-        // echo json_encode($insertTransports);
-        // echo json_encode($allTransport);
-        // if ($insertTransports) {
-        //     $response['inserted'] = true;
-        //     $response['unitId'] = $unit_id;
-        // } else {
-        //    $response['inserted'] = false;
-        //    $response['unitId'] = $unit_id;
-        // }
-        // echo json_encode($allTransport);
-        // echo json_encode($transport->multiInsertTransport($allTransport));
-
         // ****
         $firstName = $_POST->user->firstName;
         $lastName = $_POST->user->lastName;
