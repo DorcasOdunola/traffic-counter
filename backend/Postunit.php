@@ -20,18 +20,19 @@
     $unit = new Unit;
     $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitAddress);
     if ($insert) {
-        // $unit_id = $unit->res['id'];
-        //ADD DEFAULT TRANSPORT MEANS TO THE CREATED UNIT
-        // $allTransport = [
-        //     array("transport_name" => "Car", "transport_desc"=>"Car", "transport_img" => "car.png", "unit_id"=>1),
-        //     array("transport_name" => "Bus", "transport_desc"=>"Bus", "transport_img" => "bus.png", "unit_id"=>1),
-        //     array("transport_name" => "Bike", "transport_desc"=>"Bike", "transport_img" => "bike.png", "unit_id"=>1),
-        //     array("transport_name" => "Bicycle", "transport_desc"=>"Bicycle", "transport_img" => "bicycle.png", "unit_id"=>1),
-        //     array("transport_name" => "Van", "transport_desc"=>"Van", "transport_img" => "van.png", "unit_id"=>1),
-        //     array("transport_name" => "Lorry", "transport_desc"=>"Lorry", "transport_img" => "lorry.png", "unit_id"=>1)
-        // ];
-        // $transport = new Transport;
-        // $insertTransports = $transport->multiInsertTransport($allTransport);  //insert transports
+        $unit_id = $unit->res['id'];
+        // ADD DEFAULT TRANSPORT MEANS TO THE CREATED UNIT
+        $allTransport = [
+            array("transport_name" => "Car", "transport_desc"=>"Car", "transport_img" => "car.png", "unit_id"=>$unit_id),
+            array("transport_name" => "Bus", "transport_desc"=>"Bus", "transport_img" => "bus.png", "unit_id"=>$unit_id),
+            array("transport_name" => "Bike", "transport_desc"=>"Bike", "transport_img" => "bike.png", "unit_id"=>$unit_id),
+            array("transport_name" => "Bicycle", "transport_desc"=>"Bicycle", "transport_img" => "bicycle.png", "unit_id"=>$unit_id),
+            array("transport_name" => "Van", "transport_desc"=>"Van", "transport_img" => "van.png", "unit_id"=>$unit_id),
+            array("transport_name" => "Lorry", "transport_desc"=>"Lorry", "transport_img" => "lorry.png", "unit_id"=>$unit_id)
+        ];
+        $transport = new Transport;
+        $insertTransports = $transport->multiInsertTransport($allTransport);  //insert transports
+        // echo json_encode($insertTransports);
         // echo json_encode($allTransport);
         // if ($insertTransports) {
         //     $response['inserted'] = true;
@@ -52,7 +53,7 @@
         $phoneno = $_POST->user->phoneNo;
         $password = $_POST->user->password;
         $status = "Admin";
-        $unit_id = $unit->res['id'];
+        // $unit_id = $unit->res['id'];
         $pass = password_hash($password, PASSWORD_DEFAULT);
         $user = new Users;
         $img = "profilepicture.png";

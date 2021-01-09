@@ -79,13 +79,17 @@
         }
 
         public function multiInsert($query, $items, $binder){
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->con->prepare($query);
+            $check = false;
             foreach ($items as $item) {
-                $stmt->bind_param($binder, ...$items);
-                $stmt->execute();
+                // $bind_value = array($binder, ...$items);
+                $stmt->bind_param($binder, ...$item);
+                if($stmt->execute()){
+                    $check = true;
+                }
             }
             // echo json_encode($stmt);
-            return true;
+            return $check;
             // if ($don) {
 
             //    return true;

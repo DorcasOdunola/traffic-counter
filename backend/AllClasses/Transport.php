@@ -34,17 +34,15 @@
 
         public function multiInsertTransport($transports){
             $allTransports = [];
-            while ($t = $transports) {
+            foreach ($transports as $t) {
                 $eachTransport = array($t['transport_name'], $t['transport_desc'], $t['transport_img'], $t['unit_id']);
-                
-                
                 // $allTransports[] = $eachTransport;
-                // array_push($items, $item)
-                return ($eachTransport);
+                array_push($allTransports, $eachTransport);
             }
-            // $query = "INSERT INTO transport (transport_name, transport_desc, transport_img, unit_id) values (?,?,?,?)";
-            // $binder = "ssss";
-            // return $this->multiInsert($query, $allTransports, $binder);
+            // return $allTransports;
+            $query = "INSERT INTO transport (transport_name, transport_desc, transport_img, unit_id) values (?,?,?,?)";
+            $binder = "sssi";
+            return $this->multiInsert($query, $allTransports, $binder);
             // return $insert;
         }
     }
