@@ -57,14 +57,17 @@ export class UsersListComponent implements OnInit {
    let obj = {user_id, surname, first_name, last_name, email, address, user_status, phone_number, unit_id}
    let dialog =  this.dialog.open(EditprofileDialogComponent, {
       data: obj,
-      width: '600px'
+      width: '600px',
+      height: '60vh'
     });
     dialog.afterClosed().subscribe(result => {
       this.userObj = result;
+      if (result == "") {
+        return
+      }
       this.userService.updateUserProfile(this.userObj).subscribe(data => {
         this.userService.getAllUser().subscribe(data => {
           this.userArray = data;
-          console.log(this.userArray);
         })
         this.snackbar.openFromComponent(SnackbarComponent, {
           data: {message: "Edited"},
