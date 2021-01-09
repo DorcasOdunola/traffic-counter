@@ -20,11 +20,11 @@
             return $this->con;
         }
 
-        public function Insert($query, $binder) {
+        public function insert($query, $binder) {
             $stmt = $this->con->prepare($query);
             $stmt->bind_param(...$binder);
             if ($stmt->execute()) {
-                $this->res['unitId'] = $this->con->insert_id;
+                $this->res['id'] = $this->con->insert_id;
                 $this->res['true'] = true;
                return $this->res;
             } else {
@@ -32,7 +32,7 @@
             }
         }
 
-        public function Select($query) {
+        public function select($query) {
             $stmt = $this->con->prepare($query);
             if ($stmt->execute()) {
                 $fetch = $stmt->get_result();
@@ -45,7 +45,7 @@
         }
 
 
-        public function SelectSome($query, $binder) {
+        public function selectSome($query, $binder) {
             $stmt = $this->con->prepare($query);
             $stmt->bind_param(...$binder);
             if ($stmt->execute()) {
@@ -58,7 +58,7 @@
             }  
         }
 
-        public function Update($query, $binder) {
+        public function update($query, $binder) {
             $stmt = $this->con->prepare($query);
             $stmt->bind_param(...$binder);
             if ($stmt->execute()) {
@@ -68,7 +68,7 @@
             }
         }
 
-        public function Delete($query, $binder) {
+        public function delete($query, $binder) {
             $stmt = $this->con->prepare($query);
             $stmt->bind_param(...$binder);
             if ($stmt->execute()) {
@@ -84,6 +84,15 @@
                 $stmt->bind_param($binder, ...$items);
                 $stmt->execute();
             }
+            // echo json_encode($stmt);
+            return true;
+            // if ($don) {
+
+            //    return true;
+            // } else {
+            //    return false;
+            
+            
         }
 
     }

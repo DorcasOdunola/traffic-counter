@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   public email = "";
   public password = "";
   public incorrect = "";
+  public unit_id = "";
 
   ngOnInit(): void {
 
@@ -31,19 +32,30 @@ export class LoginComponent implements OnInit {
       this.service.loginUser(obj).subscribe(data => {
         if (data.userDetails == true) {
           localStorage.setItem('trafficToken', data.token);
-          let obj = {first_name: data.details.first_name, status: data.details.user_status, user_id: data.details.user_id, unit_id: data.details.unit_id, unit_name:data.details.unit_name};
+          let obj = {
+            first_name: data.details.first_name, 
+            status: data.details.user_status, 
+            user_id: data.details.user_id, 
+            unit_id: data.details.unit_id, 
+            unit_name:data.details.unit_name
+          };
           localStorage.setItem("trafficUserDet", JSON.stringify(obj));
           localStorage.setItem("userFirstName", JSON.stringify(data.firstName));
+          this.unit_id =  data.details.unit_id;
           this.router.navigate(["/dashboard"]);
-          // let dayObj = {};
-          // this.dayService.sendDay(obj).subscribe(res => {
-          //   console.log(res);
-          // })
-
+          this.createDay();
         } else {
           this.incorrect = data.message;
         }
       })
     }
+  }
+
+  createDay() {
+    let date = new Date();
+    let dDate = date.toLocaleDateString();
+    let dateObj = {date: dDate, unit_id: this.unit_id};
+    this.dayService.sendDay(dateObj).subscribe(data => {
+    })
   }
 }

@@ -19,19 +19,29 @@
 
     $unit = new Unit;
     $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitAddress);
-    $response = [];
     if ($insert) {
+        // $unit_id = $unit->res['id'];
         //ADD DEFAULT TRANSPORT MEANS TO THE CREATED UNIT
-
-        $allTransport = [
-            array("transport_name" => "Odunola", "transport_desc"=>"Dorcas", "transport_img" => "Miracle", "unit_id"=>$insert),
-            array("transport_name" => "Adeyemo", "transport_desc"=>"Tabitha", "transport_img" => "Demilade", "unit_id"=>$insert),
-            array("transport_name" => "New", "transport_desc"=>"Transport", "transport_img" => "Means", "unit_id"=>$insert)
-        ];
-        
-        $Transport = new Transport;
-        
-        $insertTransports = $Transport->multiInsert($allTransport);  //insert transports
+        // $allTransport = [
+        //     array("transport_name" => "Car", "transport_desc"=>"Car", "transport_img" => "car.png", "unit_id"=>1),
+        //     array("transport_name" => "Bus", "transport_desc"=>"Bus", "transport_img" => "bus.png", "unit_id"=>1),
+        //     array("transport_name" => "Bike", "transport_desc"=>"Bike", "transport_img" => "bike.png", "unit_id"=>1),
+        //     array("transport_name" => "Bicycle", "transport_desc"=>"Bicycle", "transport_img" => "bicycle.png", "unit_id"=>1),
+        //     array("transport_name" => "Van", "transport_desc"=>"Van", "transport_img" => "van.png", "unit_id"=>1),
+        //     array("transport_name" => "Lorry", "transport_desc"=>"Lorry", "transport_img" => "lorry.png", "unit_id"=>1)
+        // ];
+        // $transport = new Transport;
+        // $insertTransports = $transport->multiInsertTransport($allTransport);  //insert transports
+        // echo json_encode($allTransport);
+        // if ($insertTransports) {
+        //     $response['inserted'] = true;
+        //     $response['unitId'] = $unit_id;
+        // } else {
+        //    $response['inserted'] = false;
+        //    $response['unitId'] = $unit_id;
+        // }
+        // echo json_encode($allTransport);
+        // echo json_encode($transport->multiInsertTransport($allTransport));
 
         // ****
         $firstName = $_POST->user->firstName;
@@ -42,17 +52,15 @@
         $phoneno = $_POST->user->phoneNo;
         $password = $_POST->user->password;
         $status = "Admin";
-        $unit_id = $unit->res['unitId'];
+        $unit_id = $unit->res['id'];
         $pass = password_hash($password, PASSWORD_DEFAULT);
         $user = new Users;
-        // $transport = new Transport;
         $img = "profilepicture.png";
 
         //CREATE USER
         $inserted = $user->addUser($firstName, $lastName, $surname, $email, $phoneno, $address, $status, $pass, $img, $unit_id);
-        // $insertTransport = 
         if ($inserted) {
-           $user_id = $user->res['unitId'];
+           $user_id = $user->res['id'];
            $response["inserted"] = true;
            $response["unitId"] = $unit_id;
            $response["unitInitial"] = $unitInitial;
@@ -66,6 +74,7 @@
         $response["success"] = false;
     }
     echo json_encode($response);
+    // echo json_encode($allTransport);
     
 
 
