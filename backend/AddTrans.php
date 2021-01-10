@@ -10,7 +10,7 @@
     $unitId = $_POST->unitId;
 
     $transport = new Transport;
-    $insert = $transport->InsertTrans($_POST->transName, $_POST->transDesc, $_POST->unitId);
+    $insert = $transport->insertTrans($_POST->transName, $_POST->transDesc, $_POST->unitId);
 
     $response = [];
     if($insert){

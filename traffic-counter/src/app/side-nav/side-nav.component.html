@@ -101,14 +101,14 @@
           <nav class="nav mynav">
             <!-- <a>Home</a> -->
             <a class="nav-link text-dark d-none d-md-block myhover" routerLink="/count" title="count"><i class="fas fa-plus-circle"></i></a>
-            <a href="#" id="drop"  class="nav-link text-dark d-none d-md-block ml-lg-3" data-toggle="dropdown" title="settings" *ngIf="admin"><i class="fas fa-cog"></i></a>
+            <a href="#" id="drop"  class="nav-link text-dark d-none d-md-block ml-lg-3 myhover" data-toggle="dropdown" title="settings" *ngIf="admin"><i class="fas fa-cog"></i></a>
             <div class="dropdown-menu" id="drop">
               <a routerLink="/dashboard" class="nav-link h6 initialism dropdown-item myhover">Keep Report by Minutes</a>
-              <a routerLink="/dashboard" class="nav-link h6 initialism dropdown-item">Keep Report by Hour</a>
-              <a routerLink="/dashboard" class="nav-link h6 initialism dropdown-item">Keep Report by Seconds</a>
+              <a routerLink="/dashboard" class="nav-link h6 initialism dropdown-item myhover">Keep Report by Hour</a>
+              <a routerLink="/dashboard" class="nav-link h6 initialism dropdown-item myhover">Keep Report by Seconds</a>
             </div>
         
-            <a routerLink="/profile" class="nav-link ml-lg-3 text-dark d-none d-md-block" title="profile" (click)="getFirstName()"><i class="fas fa-user"></i></a>
+            <a routerLink="/profile" class="nav-link ml-lg-3 text-dark d-none d-md-block myhover" title="profile" (click)="getFirstName()"><i class="fas fa-user"></i></a>
             <img src="{{image}}" onerror="this.src='assets/profilepicture.png'" alt="" class="rounded-circle mt-1 ml-4" style="height: 40px; width: 40px;">
           </nav>
         </div>

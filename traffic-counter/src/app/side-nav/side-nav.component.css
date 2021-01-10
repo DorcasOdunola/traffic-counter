@@ -54,6 +54,6 @@ a:hover {
   color: rgba(4,4,44, 1) !important;
 }
 .myhover:hover {
-  /* background-color: rgba(4,4,44, 1) !important; */
-  /* color: brown !important; */
+  background-color: rgba(4,4,44, 1) !important;
+  color: white !important;
 }
