@@ -14,18 +14,21 @@ export class EditunitDialogComponent implements OnInit {
   public unitName = "";
   public unitAddress = "";
   public unitInitial = "";
-  public unitStatus= "";
+  public unitStatus = "";
+  public countInterval = "";
   ngOnInit(): void {
     this.unit_id = this.data.unit_id;
     this.unitName = this.data.name;
     this.unitAddress = this.data.address;
     this.unitInitial = this.data.initials;
     this.unitStatus = this.data.status;
+    this.countInterval = this.data.count_interval;
   }
 
   saveUnit() {
-    let unitObj = {unit_id: this.unit_id, name: this.unitName, address: this.unitAddress, initial: this.unitInitial, status: this.unitStatus};
+    let unitObj = {unit_id: this.unit_id, name: this.unitName, address: this.unitAddress, initial: this.unitInitial, status: this.unitStatus, countInterval: this.countInterval};
     this.dialogRef.close(unitObj);
+
   }
 
 }

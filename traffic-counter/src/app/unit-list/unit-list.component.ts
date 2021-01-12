@@ -27,17 +27,16 @@ export class UnitListComponent implements OnInit {
     })
   }
   
-  editUnit(unit_id, name, address, initials, status) {
+  editUnit(unit_id, name, address, initials, status, count_interval) {
     let dialog = this.dialog.open(EditunitDialogComponent, {
       width: '600px',
-      data: {unit_id, name, address, initials, status}
+      data: {unit_id, name, address, initials, status, count_interval}
     })
     dialog.afterClosed().subscribe(result => {
       if (!result) {
         return;
       } else {
         this.unitService.editUnit(result).subscribe(data => {
-          console.log(data);
           this.unitService.getUnit().subscribe(data => {
             this.unitArray = data;
           })

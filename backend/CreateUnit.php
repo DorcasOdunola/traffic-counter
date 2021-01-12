@@ -14,9 +14,10 @@
     $unitAddress = $_POST->unitAddress;
     $unitInitial = $_POST->unitInitial;
     $unitStatus = $_POST->unitStatus;
+    $countInterval = "60000";
 
     $unit = new Unit;
-    $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitStatus);
+    $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval);
     $response = [];
     if ($insert) {
         $unit_id = $unit->res['id'];

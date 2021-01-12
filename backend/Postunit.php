@@ -8,6 +8,7 @@
     $unitAddress = $_POST->unit->unitAddress;
     $unitInitial = $_POST->unit->unitInitial;
     $unitStatus = $_POST->unit->unitStatus;
+    $countInterval = "60000";
     // $carimg = "car.png";
     // $bicycleimg = "bicycle.png";
     // $bikeimg = "bike.png";
@@ -18,7 +19,7 @@
 
 
     $unit = new Unit;
-    $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitAddress);
+    $insert = $unit->createUnit($unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval);
     if ($insert) {
         $unit_id = $unit->res['id'];
         // ADD DEFAULT TRANSPORT MEANS TO THE CREATED UNIT

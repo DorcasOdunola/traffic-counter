@@ -19,6 +19,14 @@
                 <mat-option value="Sub-Unit">Sub-Unit</mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Count Method</mat-label>
+            <mat-select name="countInterval" [(ngModel)]="countInterval">
+                <mat-option value="60000">Keep Count per Minute</mat-option>
+                <mat-option value="3600000">Keep Count per Hour</mat-option>
+                <mat-option value="86400000">Keep Count per Day</mat-option>
+            </mat-select>
+        </mat-form-field>
         <mat-dialog-actions class="justify-content-end">
             <button mat-raised-button mat-dialog-close>Close</button>  
             <button mat-raised-button class="ml-3" (click)="saveUnit()">Save</button>

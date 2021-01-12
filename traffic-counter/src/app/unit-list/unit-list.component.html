@@ -16,6 +16,10 @@
           <th class="">Unit Address</th>
           <th class="">Unit Initials</th>
           <th class="">Unit Status</th>
+          <th class="">
+            <span>Count Method</span>
+            <span><small>(for Each unit)</small></span>
+          </th>
           <th class="">Edit</th> 
           <th class="">Delete</th> 
         </tr>
@@ -26,7 +30,8 @@
             <td>{{unit.address}}</td>
             <td>{{unit.initials}}</td>
             <td>{{unit.status}}</td>
-            <td><button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status)">
+            <td>{{unit.count_interval}}</td>
+            <td><button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status, unit.count_interval)">
               <i class="fas fa-edit"></i>
             </button></td>
             <td><button mat-raised-button class="text-danger" (click)="deleteUnit(unit.unit_id)"><i class="fas fa-trash"></i></button></td>

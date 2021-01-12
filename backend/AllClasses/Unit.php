@@ -6,10 +6,9 @@
         public function __construct() {
             parent::__construct();
         }
-
-        public function createUnit($unitName, $unitAddress, $unitInitial, $unitStatus) {
-          $query = "INSERT INTO unit (name, address, initials, status) VALUES (?, ?, ?, ?)";
-          $binder = array("ssss", $unitName, $unitAddress, $unitInitial, $unitStatus);
+        public function createUnit($unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval) {
+          $query = "INSERT INTO unit (name, address, initials, status, count_interval) VALUES (?, ?, ?, ?, ?)";
+          $binder = array("sssss", $unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval);
           return $this->insert($query, $binder);
         }
 
@@ -24,9 +23,9 @@
             return $this->delete($query, $binder);
         }
 
-        public function updateUnit($unit_id, $unitName, $unitAddress, $unitInitial, $unitStatus) {
-            $query = "UPDATE unit set name = ?, address = ?, initials = ?, status = ? WHERE unit_id = ?";
-            $binder = array('sssss',$unitName, $unitAddress, $unitInitial, $unitStatus, $unit_id);
+        public function updateUnit($unit_id, $unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval) {
+            $query = "UPDATE unit set name = ?, address = ?, initials = ?, status = ?, count_interval = ? WHERE unit_id = ?";
+            $binder = array('ssssss',$unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval, $unit_id);
             return $this->update($query, $binder);
 
         }

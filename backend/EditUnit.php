@@ -8,9 +8,10 @@
     $unitAddress = $_POST->address;
     $unitInitial = $_POST->initial;
     $unitStatus = $_POST->status;
+    $countInterval = $_POST->countInterval;
 
     $unit = new Unit;
-    $insert = $unit->updateUnit($unit_id, $unitName, $unitAddress, $unitInitial, $unitStatus);
+    $insert = $unit->updateUnit($unit_id, $unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval);
     $response = [];
     if ($insert) {
         $response["edited"] = true;
