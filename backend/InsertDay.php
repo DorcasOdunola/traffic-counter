@@ -20,6 +20,7 @@
        $response['exist'] = false;
     }
     echo json_encode($response);
+    // echo json_encode($_POST);
     
 
 
