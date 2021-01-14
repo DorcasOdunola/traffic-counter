@@ -19,7 +19,6 @@
         $response['success'] = false;
         $response['message'] = "An error occurred";
     }
-
     echo json_encode($response);
 
 ?>
