@@ -8,9 +8,9 @@
             parent::__construct();
         }
 
-        public function insertTrans($transName, $transDesc, $unitId) {
-            $query = "INSERT INTO transport (transport_name, transport_desc, unit_id) VALUES (?, ?, ?)";
-            $binder = array("sss", $transName, $transDesc, $unitId);
+        public function insertTrans($transName, $transDesc, $transport_img, $unitId) {
+            $query = "INSERT INTO transport (transport_name, transport_desc, transport_img, unit_id) VALUES (?, ?, ?, ?)";
+            $binder = array("ssss", $transName, $transDesc, $transport_img, $unitId);
             return $this->insert($query, $binder);
         }
 

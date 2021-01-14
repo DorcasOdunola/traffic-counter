@@ -57,3 +57,9 @@ a:hover {
   background-color: rgba(4,4,44, 1) !important;
   color: white !important;
 }
+
+.prfPic {
+  height: 40px; 
+  width: 40px;
+  cursor: pointer;
+}

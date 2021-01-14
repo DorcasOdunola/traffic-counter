@@ -36,6 +36,9 @@
                                 <textarea matInput name="transDesc" [(ngModel)]="transDesc"></textarea>
                             </mat-form-field>
                         </div>
+                    </form>
+                    <form enctype="multipart/form-data">
+                        <input type="file" (change)="changeTransPic($event)">
                         <button mat-raised-button color="accent" class="mb-3" (click)="addTransport()">Submit</button>
                     </form>
                 </div>
