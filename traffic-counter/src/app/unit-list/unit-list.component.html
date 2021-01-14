@@ -30,7 +30,11 @@
             <td>{{unit.address}}</td>
             <td>{{unit.initials}}</td>
             <td>{{unit.status}}</td>
-            <td>{{unit.count_interval}}</td>
+            <td>
+              <span *ngIf="unit.count_interval == '60000'">Keep Count per Minute</span>
+              <span *ngIf="unit.count_interval == '3600000'">Keep Count per Hour</span>
+              <span *ngIf="unit.count_interval == '86400000'">Keep Count per Day</span>
+            </td>
             <td><button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status, unit.count_interval)">
               <i class="fas fa-edit"></i>
             </button></td>

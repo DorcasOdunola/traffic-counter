@@ -3,7 +3,7 @@
         <div class="col-6 mx-auto text-center">
             <div>
                 <span class="text-muted text">Date:</span>
-                <span class="text-muted text">{{unit_date}}</span>
+                <span class="text-muted text">{{date}}</span>
             </div>
             <div>
                 <span class="text-muted text">Time:</span>
@@ -25,7 +25,7 @@
                 <div class="col-3">{{transport.transport_name}}</div>
                 <div class="col-2">{{value}}</div>
                 <div class="col-2">
-                    <button class="btn btn-dark mb-2 shadow-sm btn-sm" (click)="sendReport(transport.transport_id)"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-dark mb-2 shadow-sm btn-sm" (click)="increaseCount(transport.transport_id)"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-dark mb-2 shadow-sm btn-sm"><i class="fa fa-minus"></i></button>

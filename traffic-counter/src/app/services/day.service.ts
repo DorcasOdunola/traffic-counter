@@ -13,5 +13,9 @@ export class DayService {
 
   public sendDay(obj) {
     return this.httpClient.post<any>(`${this.baseUrl}InsertDay.php`, obj)
-   }
+  }
+
+  public getDay(dayObj){
+    return this.httpClient.post<any>(`${this.baseUrl}GetDay.php`, dayObj)
+  }
 }

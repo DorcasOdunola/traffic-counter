@@ -63,6 +63,9 @@ export class AdminProfileComponent implements OnInit {
     console.log(this.uploadData);
     this.userService.uploadImg(this.uploadData).subscribe(data => {
       if (data.inserted == true) {
+        this.userService.getProfile().subscribe(data => {
+          this.image = `http://localhost/trafficCounter/backend/uploads/${data.image}`;
+        })
         this.snackbar.openFromComponent(SnackbarComponent, {
           data: {message: "Image Uploaded Successfully"},
           duration: 3000

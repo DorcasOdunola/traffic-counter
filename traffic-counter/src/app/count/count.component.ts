@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { TransportService } from '../services/transport.service';
+import { DayService } from '../services/day.service';
 
 @Component({
   selector: 'app-count',
@@ -9,17 +10,20 @@ import { TransportService } from '../services/transport.service';
 })
 export class CountComponent implements OnInit {
 
-  constructor(public transService: TransportService, public reportService: ReportService) { }
+  constructor(public transService: TransportService, public reportService: ReportService, public dayService: DayService) { }
 
   public userDetails:any = {};
   public transArray: any = [];
+  public savedTransArray = [];
   public unit_name;
-  public unit_date;
+  public date;
   public unit_time;
   public info = "";
   public unit_id = "";
   public user_id = "";
   public value;
+  public unit_id2 = "";
+  public
   ngOnInit(): void {
     this.userDetails = JSON.parse(localStorage.getItem("trafficUserDet"));
     this.unit_id = this.userDetails.unit_id;
@@ -31,15 +35,24 @@ export class CountComponent implements OnInit {
       } else {
         this.transArray = data;
         this.info = "";
+        console.log(this.transArray);
       }
     })
     this.getDetails();
     this.getTimeDate();
-    this.getAllReport();
-    // setInterval(function() {
-    //   this.getTimeDate()
-    // }, 1000)
+    // this.getAllReport();
+    let dayObj = {unit_id: this.unit_id, day: this.date};
+    this.dayService.getDay(dayObj).subscribe(data => {
+      data.map(date => {
+        this.unit_id2 = date.day_id;
+      })
+      console.log(this.unit_id2);
+    })
   }
+  // setInterval(() => {
+  //   this.getTimeDate()
+  // }, 1000)
+
   getAllReport() {
     this.reportService.getAllReport(this.unit_id).subscribe(data => {
       this.value = data.length;
@@ -48,7 +61,7 @@ export class CountComponent implements OnInit {
   }
   getDetails() {
     let date = new Date();
-    this.unit_date = date.toLocaleDateString();
+    this.date = date.toLocaleDateString();
   }
   
   getTimeDate () {
@@ -63,6 +76,30 @@ export class CountComponent implements OnInit {
     }
   }
 
+  increaseCount(transport_id) {
+    if (localStorage.getItem("TransArray") != null) {
+      this.savedTransArray = JSON.parse(localStorage.getItem("TransArray"));
+    } else {
+      this.savedTransArray = [];
+    }
+    if (this.savedTransArray == []) {
+      let obj = {transport_id, unit_id: this.unit_id, day_id: this.unit_id2, value: 1};
+      this.savedTransArray.push(obj);
+    } else {
+      let findIndex = this.savedTransArray.findIndex(trans => trans.transport_id == transport_id);
+      console.log(findIndex);
+      if (findIndex >= 0) {
+        this.savedTransArray[findIndex].value = this.savedTransArray[findIndex].value+=1;
+        localStorage.setItem("TransArray", JSON.stringify(this.savedTransArray));
+      } else {
+        let obj = {transport_id, unit_id: this.unit_id, day_id: this.unit_id2, value: 1};
+        this.savedTransArray.push(obj);
+        localStorage.setItem("TransArray", JSON.stringify(this.savedTransArray));
+      }
+    }
+    console.log(this.savedTransArray);
+  }
+
   sendReport(transport_id) {
     let obj = {unit_id: this.unit_id, transport_id: transport_id, user_id: this.user_id}
     console.log(obj);
@@ -70,4 +107,8 @@ export class CountComponent implements OnInit {
       console.log(data);
     })
   }
+
 }
+// setTimeout(() => {
+//   alert("hi");
+// }, 5000);

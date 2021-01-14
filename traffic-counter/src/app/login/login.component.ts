@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
     let dDate = date.toLocaleDateString();
     let dateObj = {date: dDate, unit_id: this.unit_id};
     this.dayService.sendDay(dateObj).subscribe(data => {
+      console.log(data);
     })
   }
 }
