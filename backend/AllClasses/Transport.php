@@ -15,7 +15,7 @@
         }
 
         public function getTransport($unit_id) {
-            $query = "SELECT * FROM transport WHERE unit_id = ?";
+            $query = "SELECT * FROM transport JOIN unit USING (unit_id) WHERE unit_id = ?";
             $binder = array("s", $unit_id);
             return $this->selectSome($query, $binder);
         }
@@ -26,9 +26,9 @@
             return $this->delete($query, $binder);
         }
 
-        public function updateTransport($trans_id, $trans_name, $trans_desc) {
-            $query = "UPDATE transport set transport_name = ?, transport_desc = ? WHERE transport_id = ?";
-            $binder = array('sss', $trans_name, $trans_desc, $trans_id);
+        public function updateTransport($trans_id, $trans_name, $trans_desc, $trans_img) {
+            $query = "UPDATE transport set transport_name = ?, transport_desc = ?, transport_img = ? WHERE transport_id = ?";
+            $binder = array('ssss', $trans_name, $trans_desc, $trans_img, $trans_id);
             return $this->update($query, $binder);
         }
 

@@ -12,6 +12,7 @@ export class EdittransportDialogComponent implements OnInit {
 
   public transName = "";
   public transDesc = "";
+  public imgFile = "";
 
   ngOnInit(): void {
     this.transName = this.data.trans_name;
@@ -19,8 +20,18 @@ export class EdittransportDialogComponent implements OnInit {
   }
 
   editTransport() {
-    let transObj = {trans_id: this.data.trans_id, trans_name: this.transName, trans_desc: this.transDesc};
-    this.dialogRef.close(transObj);
+    if (this.imgFile == "") {
+      this.imgFile = this.data.trans_img;
+      let transObj = {trans_id: this.data.trans_id, trans_name: this.transName, trans_desc: this.transDesc, imgFile: this.imgFile};
+      this.dialogRef.close(transObj);
+    } else {
+      let transObj = {trans_id: this.data.trans_id, trans_name: this.transName, trans_desc: this.transDesc, imgFile: this.imgFile};
+      this.dialogRef.close(transObj);
+    }
+  }
+
+  changeTransPic(event) {
+    this.imgFile = event.target.files[0];
   }
 
 }

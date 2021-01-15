@@ -22,6 +22,7 @@ export class TransTranslistComponent implements OnInit {
   public seen = false;
   public transportSearch = "";
   public unit_name: any;
+  public uploadFile = new FormData;
   ngOnInit(): void {
     this.unitService.unitId.subscribe(data => {
       this.unit_id = data;
@@ -75,14 +76,17 @@ export class TransTranslistComponent implements OnInit {
   })
   }
 
-  editTransport(trans_id, trans_name, trans_desc) {
+  editTransport(trans_id, trans_name, trans_desc, trans_img) {
     let dialog = this.dialog.open(EdittransportDialogComponent, {
-      data: {trans_id, trans_name, trans_desc},
+      data: {trans_id, trans_name, trans_desc, trans_img},
       width: '500px'
     })
     dialog.afterClosed().subscribe(result => {
-      console.log(result);
-      this.transportService.editTrans(result).subscribe(data => {
+      this.uploadFile.append('file', result.imgFile);
+      this.uploadFile.append('transName', result.trans_name);
+      this.uploadFile.append('transDesc', result.trans_desc);
+      this.uploadFile.append('trans_id', result.trans_id);
+      this.transportService.editTrans(this.uploadFile).subscribe(data => {
         if (data.edited == true) {
           this.transportService.getTrans(this.unit_id).subscribe(backData => {
             console.log(backData)

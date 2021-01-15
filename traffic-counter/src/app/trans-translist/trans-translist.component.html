@@ -9,7 +9,10 @@
         </div>
     </div>
     <div class=""  *ngIf="seen">
-        <p class="display-4 text-center">Transport List</p>
+        <p class="display-4 text-center">
+            <span>{{unit_name}} </span>
+            <span>Transport List</span>
+        </p>
         <input type="text" placeholder="Search Transport Means" class="form-control mb-3" [(ngModel)]="transportSearch">
         <mat-card>
             <mat-card-content>
@@ -29,10 +32,10 @@
                             <div class="col-3">{{transport.transport_name}}</div>
                             <!-- <div class="col-3">{{transport.transport_desc}}</div> -->
                             <div class="col-3">
-                                <img src="http://localhost/trafficCounter/backend/uploads/{{transport.transport_img}}" class="w-25" alt="">
+                                 <img src="http://localhost/trafficCounter/backend/uploads/{{transport.transport_img}}" class="w-25" alt="">
                             </div>
                             <div class="col-3">
-                                <button mat-raised-button class="text-primary btn-sm" (click)="editTransport(transport.transport_id, transport.transport_name, transport.transport_desc)">
+                                <button mat-raised-button class="text-primary btn-sm" (click)="editTransport(transport.transport_id, transport.transport_name, transport.transport_desc, transport.transport_img)">
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </div>

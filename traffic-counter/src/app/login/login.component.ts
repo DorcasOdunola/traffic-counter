@@ -37,10 +37,11 @@ export class LoginComponent implements OnInit {
             status: data.details.user_status, 
             user_id: data.details.user_id, 
             unit_id: data.details.unit_id, 
-            unit_name:data.details.unit_name
+            unit_name: data.details.unit_name,
+            count_interval: data.details.count_interval
           };
           localStorage.setItem("trafficUserDet", JSON.stringify(obj));
-          localStorage.setItem("userFirstName", JSON.stringify(data.firstName));
+          // localStorage.setItem("userFirstName", JSON.stringify(data.firstName));
           this.unit_id =  data.details.unit_id;
           this.router.navigate(["/dashboard"]);
           this.createDay();

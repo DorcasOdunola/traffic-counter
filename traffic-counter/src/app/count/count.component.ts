@@ -23,24 +23,23 @@ export class CountComponent implements OnInit {
   public user_id = "";
   public value;
   public unit_id2 = "";
-  public
+  public count_interval = "";
   ngOnInit(): void {
     this.userDetails = JSON.parse(localStorage.getItem("trafficUserDet"));
     this.unit_id = this.userDetails.unit_id;
     this.unit_name = this.userDetails.unit_name;
     this.user_id = this.userDetails.user_id;
+    this.count_interval = this.userDetails.count_interval;
     this.transService.getTrans(this.unit_id).subscribe(data => {
       if (data.message == "no transport means") {
         this.info = `No Transport Means for Counting in ${this.unit_name} Unit!!!`
       } else {
         this.transArray = data;
         this.info = "";
-        console.log(this.transArray);
       }
     })
     this.getDetails();
     this.getTimeDate();
-    // this.getAllReport();
     let dayObj = {unit_id: this.unit_id, day: this.date};
     this.dayService.getDay(dayObj).subscribe(data => {
       data.map(date => {
@@ -100,15 +99,18 @@ export class CountComponent implements OnInit {
     console.log(this.savedTransArray);
   }
 
-  sendReport(transport_id) {
-    let obj = {unit_id: this.unit_id, transport_id: transport_id, user_id: this.user_id}
-    console.log(obj);
-    this.reportService.saveReport(obj).subscribe(data => {
-      console.log(data);
+  sendReport() {
+    let getCount = JSON.parse(localStorage.getItem("TransArray"));
+    this.reportService.saveReport(getCount).subscribe(data => {
+      // console.log(data);
     })
+    
   }
 
+
 }
+
+
 // setTimeout(() => {
 //   alert("hi");
 // }, 5000);

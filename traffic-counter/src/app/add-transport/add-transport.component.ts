@@ -31,26 +31,33 @@ export class AddTransportComponent implements OnInit {
     console.log(this.transName);
     console.log(this.transDesc);
     console.log(this.unitId);
-    // this.uploadFile.append('file', this.imgFile);
-    // this.uploadFile.append('transName', this.transName);
-    // this.uploadFile.append('transDesc', this.transDesc);
-    // this.uploadFile.append('unit_id', this.unitId);
-    // this.transportService.addTrans(this.uploadFile).subscribe(data => {
-    //   if (data.success == true) {
-    //     this.snackBar.openFromComponent(SnackbarComponent, {
-    //       data: {message: "Transport means successfully Created!!"},
-    //       duration: 3000
-    //     })
-    //     this.transName = "";
-    //     this.transDesc = "";
-    //     this.unitId = "";
-    //   } else {
-    //     this.snackBar.openFromComponent(SnackbarComponent, {
-    //       data: {message: "This Transport means already exist in this unit!"},
-    //       duration: 3000
-    //     })
-    //   }
-    // })
+    if (this.imgFile == "" || this.transName == "" || this.transDesc == "" || this.unitId == "") {
+      this.snackBar.openFromComponent(SnackbarComponent, {
+        data: {message: "Provide Transport Means Details"},
+        duration: 3000
+      })
+    } else {
+      this.uploadFile.append('file', this.imgFile);
+      this.uploadFile.append('transName', this.transName);
+      this.uploadFile.append('transDesc', this.transDesc);
+      this.uploadFile.append('unit_id', this.unitId);
+      this.transportService.addTrans(this.uploadFile).subscribe(data => {
+        if (data.success == true) {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: {message: "Transport means successfully Created!!"},
+            duration: 3000
+          })
+          this.transName = "";
+          this.transDesc = "";
+          this.unitId = "";
+        } else {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: {message: "This Transport means already exist in this unit!"},
+            duration: 3000
+          })
+        }
+      })
+    }
   }
 
   changeTransPic(event) {

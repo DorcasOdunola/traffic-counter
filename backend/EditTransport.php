@@ -1,21 +1,38 @@
 <?php
     require "AllClasses/Transport.php";
 
-    $_POST = json_decode(file_get_contents("php://input"));
-    $trans_id = $_POST->trans_id;
-    $trans_name = $_POST->trans_name;
-    $trans_desc = $_POST->trans_desc;
-
-    $transport = new Transport;
-    $insert = $transport->updateTransport($trans_id, $trans_name, $trans_desc);
+    // $_POST = json_decode(file_get_contents("php://input"));
     $response = [];
-    if ($insert) {
-        $response['edited'] = true;
+    $trans_id = $_POST['trans_id'];
+    $trans_name = $_POST['transName'];
+    $trans_desc = $_POST['transDesc'];
+    $transport = new Transport;
+    if ($_FILES == []) {
+        $trans_img = $_POST['file'];
+        $insert = $transport->updateTransport($trans_id, $trans_name, $trans_desc, $trans_img);
+        if ($insert) {
+            $response['edited'] = true;
+        } else {
+            $response['edited'] = false;
+        }
     } else {
-        $response['edited'] = false;
+        $fileName = $_FILES['file']['name'];
+        $trans_img = time().$fileName;
+        $moveFile = move_uploaded_file($fileName = $_FILES['file']['tmp_name'], 'uploads/'.$trans_img);
+        if ($moveFile) {
+            $insert = $transport->updateTransport($trans_id, $trans_name, $trans_desc, $trans_img);
+            if ($insert) {
+                $response['edited'] = true;
+            } else {
+                $response['edited'] = false;
+            }
+        } else {
+           $response['movedFile'] = false;
+        }
     }
-    echo json_encode($response);
     
+    echo json_encode($response);
+
 
 
 ?>

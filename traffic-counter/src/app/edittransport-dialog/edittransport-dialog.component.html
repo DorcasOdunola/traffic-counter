@@ -14,6 +14,9 @@
                         <textarea matInput name="transDesc" [(ngModel)]="transDesc"></textarea>
                     </mat-form-field>
                 </div>
+            </form>
+            <form enctype="multipart/form-data">
+                <input type="file" (change)="changeTransPic($event)">
                 <mat-dialog-actions class="justify-content-end">
                     <button mat-raised-button mat-dialog-close>Close</button>  
                     <button mat-raised-button class="ml-3" (click)="editTransport()">Save</button>

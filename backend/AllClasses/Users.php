@@ -13,7 +13,7 @@
         }
 
         public function getUser($email) {
-            $query = "SELECT user_id, password, first_name, users.status as user_status, unit_id, unit.name as unit_name FROM users JOIN unit USING (unit_id) WHERE email = ? ";
+            $query = "SELECT user_id, password, first_name, users.status as user_status, unit_id, unit.name as unit_name, count_interval FROM users JOIN unit USING (unit_id) WHERE email = ? ";
             $binder = array("s", $email);
             return $this->selectSome($query, $binder);
         }

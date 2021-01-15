@@ -1,18 +1,29 @@
 <div class="container-fluid">
+    <button mat-raised-button class="mt-2" (click)="sendReport()">Count</button>
     <div class="row mt-3">
         <div class="col-6 mx-auto text-center">
             <div>
-                <span class="text-muted text">Date:</span>
-                <span class="text-muted text">{{date}}</span>
+                <span class="text-muted h6 text">Unit:</span>
+                <span class="text-muted text"> {{unit_name}}</span><br>
             </div>
             <div>
-                <span class="text-muted text">Time:</span>
-                <span class="text-muted text">{{unit_time}}</span>
+                <span class="text-muted h6 text">Date:</span>
+                <span class="text-muted text"> {{date}}</span>
+            </div>
+            <div>
+                <span class="text-muted h6 text">Time:</span>
+                <span class="text-muted text"> {{unit_time}}</span>
             </div>
         </div>
         <div class="col-6 mx-auto text-center">
-            <span class="text-muted text">Unit:</span>
-            <span class="text-muted text">{{unit_name}}</span>
+            <div class="text-muted text">
+                <span class="h6">Count Method:</span><br>
+                <span>
+                    <span *ngIf="count_interval == '60000'">Keep Count per Minute</span>
+                    <span *ngIf="count_interval == '3600000'">Keep Count per Hour</span>
+                    <span *ngIf="count_interval == '86400000'">Keep Count per Day</span>
+                </span>
+            </div>
         </div>
     </div>
     <div class="row">
