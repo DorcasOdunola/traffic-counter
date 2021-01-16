@@ -14,7 +14,7 @@ export class CountComponent implements OnInit {
 
   public userDetails:any = {};
   public transArray: any = [];
-  public savedTransArray = [];
+  public saveCountArray = [];
   public unit_name;
   public date;
   public unit_time;
@@ -40,6 +40,7 @@ export class CountComponent implements OnInit {
     })
     this.getDetails();
     this.getTimeDate();
+    // this.getAllReport();
     let dayObj = {unit_id: this.unit_id, day: this.date};
     this.dayService.getDay(dayObj).subscribe(data => {
       data.map(date => {
@@ -54,7 +55,7 @@ export class CountComponent implements OnInit {
 
   getAllReport() {
     this.reportService.getAllReport(this.unit_id).subscribe(data => {
-      this.value = data.length;
+      // this.value = data.length;
       console.log(data);
     })
   }
@@ -76,41 +77,30 @@ export class CountComponent implements OnInit {
   }
 
   increaseCount(transport_id) {
-    if (localStorage.getItem("TransArray") != null) {
-      this.savedTransArray = JSON.parse(localStorage.getItem("TransArray"));
+    if (localStorage.getItem("CountArray") != null) {
+      this.saveCountArray = JSON.parse(localStorage.getItem("CountArray"));
     } else {
-      this.savedTransArray = [];
+      this.saveCountArray = [];
     }
-    if (this.savedTransArray == []) {
+    if (this.saveCountArray == []) {
       let obj = {transport_id, unit_id: this.unit_id, day_id: this.unit_id2, value: 1};
-      this.savedTransArray.push(obj);
+      this.saveCountArray.push(obj);
     } else {
-      let findIndex = this.savedTransArray.findIndex(trans => trans.transport_id == transport_id);
+      let findIndex = this.saveCountArray.findIndex(trans => trans.transport_id == transport_id);
       console.log(findIndex);
       if (findIndex >= 0) {
-        this.savedTransArray[findIndex].value = this.savedTransArray[findIndex].value+=1;
-        localStorage.setItem("TransArray", JSON.stringify(this.savedTransArray));
+        this.saveCountArray[findIndex].value = this.saveCountArray[findIndex].value+=1;
+        localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
       } else {
         let obj = {transport_id, unit_id: this.unit_id, day_id: this.unit_id2, value: 1};
-        this.savedTransArray.push(obj);
-        localStorage.setItem("TransArray", JSON.stringify(this.savedTransArray));
+        this.saveCountArray.push(obj);
+        localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
       }
     }
-    console.log(this.savedTransArray);
-  }
-
-  sendReport() {
-    let getCount = JSON.parse(localStorage.getItem("TransArray"));
-    this.reportService.saveReport(getCount).subscribe(data => {
-      // console.log(data);
-    })
-    
+    console.log(this.saveCountArray);
   }
 
 
 }
 
 
-// setTimeout(() => {
-//   alert("hi");
-// }, 5000);
