@@ -18,9 +18,20 @@
         }
 
         public function getAllReport() {
-            $query = "SELECT COUNT(transport_id), unit_id FROM report GROUP BY unit_id";
-            $binder = array('s', $unit_id);
+            $query = "SELECT * FROM report";
             return $this->select($query);
+        }
+
+        public function getReportPerUnit($date) {
+            $query = "SELECT report_id, value, transport_id, transport_name,transport_img, report.unit_id as unit_id, day_id, day_date FROM report JOIN unit USING (unit_id) JOIN transport USING (transport_id) JOIN day USING (day_id) WHERE day_date = ?";
+            $binder = array('s', $date);
+            return $this->selectSome($query, $binder);
+        }
+
+        public function getReportPerRange($fromDate, $toDate) {
+            $query = "SELECT report_id, value, transport_id, transport_name,transport_img, report.unit_id as unit_id, day_id, day_date FROM report JOIN unit USING (unit_id) JOIN transport USING (transport_id) JOIN day USING (day_id) WHERE day_date BETWEEN ? AND ?";
+            $binder = array('ss', $fromDate, $toDate);
+            return $this->selectSome($query, $binder);
         }
     }
 
