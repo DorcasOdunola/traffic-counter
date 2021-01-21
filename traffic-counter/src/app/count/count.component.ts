@@ -40,7 +40,7 @@ export class CountComponent implements OnInit {
     })
     this.getDetails();
     this.getTimeDate();
-    // this.getAllReport();
+    this.getAllReport();
     let dayObj = {unit_id: this.unit_id, day: this.date};
     this.dayService.getDay(dayObj).subscribe(data => {
       data.map(date => {

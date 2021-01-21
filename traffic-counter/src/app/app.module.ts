@@ -35,6 +35,7 @@ import { TransTranslistComponent } from './trans-translist/trans-translist.compo
 import { EdittransportDialogComponent } from './edittransport-dialog/edittransport-dialog.component';
 import { SearchTransportPipe } from './pipes/search-transport.pipe';
 import { ResetpassDialogComponent } from './resetpass-dialog/resetpass-dialog.component';
+import { UnitReportComponent } from './unit-report/unit-report.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ResetpassDialogComponent } from './resetpass-dialog/resetpass-dialog.co
     EdittransportDialogComponent,
     SearchTransportPipe,
     ResetpassDialogComponent,
+    UnitReportComponent,
   ],
   imports: [
     BrowserModule,

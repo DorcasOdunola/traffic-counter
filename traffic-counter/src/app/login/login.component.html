@@ -1,7 +1,7 @@
 <div class="container-fluid bg-light p-2" style="height: 100vh;">
-    <div class="row w-100 mt-md-5">
-        <div class="col-11 col-md-4 mx-auto mt-5 p-md-5">
-            <div class="bg-white shadow-sm" style="height: 60vh;">
+    <div class="row w-100 mt-md-5 mx-auto">
+        <div class="col-12 col-md-4 mx-auto p-1 mt-5 mb-5 mb-md-0 p-md-5">
+            <div class="bg-white mx-auto shadow-sm" style="height: 60vh;">
                 <p class="display-4 text-center pt-3">TFC</p>
                 <p class="h5 initialism text-center">Login</p>
                 <form class="form-group p-5 p-md-5">
@@ -14,7 +14,7 @@
                         <input type="password" name="password" matInput placeholder="password" [(ngModel)]="password">
                     </mat-form-field>
                     <p class="text-danger text-center">{{incorrect}}</p>
-                    <div class="row mx-auto justify-content-center">
+                    <div class="row mx-auto justify-content-center mb-3">
                         <button mat-raised-button color="primary" (click)="login()">Login</button>
                     </div>
                 </form>

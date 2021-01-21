@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <span>Total Count</span><br>
+            <span>{{number}}</span>
+            <div>
+                <p *ngFor="let unit of filtered">
+                    <span>{{unit.transport_name}} {{unit.value}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

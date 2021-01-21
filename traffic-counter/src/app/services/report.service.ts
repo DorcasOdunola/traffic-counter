@@ -18,4 +18,12 @@ export class ReportService {
   public getAllReport(unit_id) {
     return this.httpClient.post<any>(`${this.baseUrl}GetAllReport.php`, unit_id)
   }
+
+  public getReportPerUnit(dateObj) {
+    return this.httpClient.post<any>(`${this.baseUrl}GetReportPerUnit.php`, dateObj)
+  }
+
+  public getReportPerRange(dateObj) {
+    return this.httpClient.post<any>(`${this.baseUrl}GetReportPerRange.php`, dateObj)
+  }
 }

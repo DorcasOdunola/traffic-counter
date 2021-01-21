@@ -1,5 +1,71 @@
 <div class="container-fluid">
-    <div class="row">
+  <div class="row">
+    <div class="col-12 col-md-6 mx-auto">
+      <mat-card class="p-1 mt-2">
+        <mat-form-field appearance="legacy" class="w-100">
+          <mat-label>Select unit to view each unit report</mat-label>
+          <mat-select name="unit" (selectionChange)="getUnitId($event)">
+              <mat-option [value]="unit.unit_id" *ngFor="let unit of unitArray">{{unit.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-5">
+      <p>
+        <span>Select a date to the get the report for that day and for this unit </span>
+        <span><input type="date" class="form-control" name="date" [(ngModel)]="selectDate" ></span>
+        <button class="btn btn-dark" (click)="getReportPerDay()">Get Report</button>
+      </p>
+    </div>
+    <div class="col-12 col-md-7">
+      <p>Select Report by Range (From a day to another day)</p>
+       <div class="form-inline">
+          <div class="form-group">
+            <label for="">From:</label>
+            <input type="date" class="form-control" name="from" id="" [(ngModel)]="fromDate">
+          </div>
+
+          <div class="form-group">
+            <label for="">To:</label>
+            <input type="date" class="form-control" name="To" id="" [(ngModel)]="toDate">
+          </div>
+       </div>
+       <button class="btn btn-dark" (click)="getReportPerRange()">Get Report</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-light table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Transport Image</th>
+            <th>Transport Means</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of totalReport">
+            <td>
+              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" alt="">
+            </td>
+            <td>{{report.transport_name}}</td>
+            <td>{{report.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="container-fluid">
+  <div class="row">
         <div class="col-12 col-md-6 mx-auto text-center">
             <mat-card>
                 <mat-card-content>
@@ -10,4 +76,37 @@
             </mat-card>
         </div>
     </div>
-</div>
+    <div class="row">
+      <div class="col-12 col-md-6 text-center">
+        <mat-card>
+            <mat-card-content>
+              <p style="font-size: 50pt;" class="text-center"><span><i class="fas fa-map-marker-alt"></i></span></p>
+              <span class="text-muted h5 text-center">Total Number of Central Unit</span><br>
+              <span class="display-4 text-center">{{noOfCentalUnit}}</span>
+            </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-12 col-md-6 text-center">
+          <mat-card>
+              <mat-card-content>
+                <p style="font-size: 50pt;" class="text-center"><span><i class="fas fa-map-marker-alt"></i></span></p>
+                <span class="text-muted h5 text-center">Total Number of Sub-unit</span><br>
+                <span class="display-4 text-center">{{noOfSubUnit}}</span>
+              </mat-card-content>
+          </mat-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedIndex" (selectedIndexChange)="tabChanged($event)">
+          <mat-tab *ngFor="let unit of unitArray" label="{{unit.name}} {{unit.unit_id}}" >
+          </mat-tab>
+          <mat-tab label="Second">Content 2</mat-tab>
+          <mat-tab label="Third">Content 3</mat-tab>
+          </mat-tab-group>
+          <app-unit-report [unit_id]="unit_id"></app-unit-report>
+
+      </div>
+    </div>
+</div> -->
