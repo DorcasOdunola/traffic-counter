@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { environment } from '../../environments/environment';
 export class ReportService {
 
   public baseUrl = environment.baseUrl;
+  public unitId = new BehaviorSubject(String);
   
   constructor(public httpClient: HttpClient) { }
 

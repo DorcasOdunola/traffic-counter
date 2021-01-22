@@ -93,9 +93,27 @@ export class ReportComponent implements OnInit {
     let fromDate = frmDate.toLocaleDateString();
     let getToDate = new Date(this.toDate);
     let toDate = getToDate.toLocaleDateString();
-    let dateObj = {fromDate, toDate};
+    let unit_id = this.unit_id;
+    let dateObj = {fromDate, toDate, unit_id};
+    console.log(dateObj);
     this.reportService.getReportPerRange(dateObj).subscribe(data => {
-      console.log(data);
+      if (data.getReport == false) {
+        return;
+      } else {
+        this.reportArray = data;
+        let filtered = this.reportArray.filter(report => report.unit_id == this.unit_id);
+      console.log(filtered, "wholeReport");
+      filtered.map(report => {
+        let find = this.totalReport.findIndex(find => find.transport_id == report.transport_id);
+        if (find >= 0) {
+            this.totalReport[find].value = Number(this.totalReport[find].value) + Number(report.value);
+            Number(this.totalReport[find].value);
+        } else {
+          this.totalReport.push(report);        
+      }
+    })
+       
+      }
     })
   }
 

@@ -6,6 +6,7 @@
 
     $fromDate = $_POST->fromDate;
     $toDate = $_POST->toDate;
+    $unit_id = $_POST->unit_id;
 
     $report = new Report;
     $insert = $report->getReportPerRange($fromDate, $toDate);
