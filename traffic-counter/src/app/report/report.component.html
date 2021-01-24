@@ -1,44 +1,60 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-md-6 mx-auto">
-      <mat-card class="p-1 mt-2">
+    <div class="col-12 col-md-4 my-auto mx-auto">
+      <mat-card class="">
         <mat-form-field appearance="legacy" class="w-100">
           <mat-label>Select unit to view each unit report</mat-label>
-          <mat-select name="unit" (selectionChange)="getUnitId($event)">
+          <mat-select name="unit" (selectionChange)="getReportForUnit($event)">
               <mat-option [value]="unit.unit_id" *ngFor="let unit of unitArray">{{unit.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-md-5">
-      <p>
+    <div class="col-12 col-md-4 mt-2" *ngIf="showForUnitId">
+      <mat-card>
         <span>Select a date to the get the report for that day and for this unit </span>
         <span><input type="date" class="form-control" name="date" [(ngModel)]="selectDate" ></span>
-        <button class="btn btn-dark" (click)="getReportPerDay()">Get Report</button>
-      </p>
+        <div class="row mx-auto justify-content-center">
+          <button mat-raised-button class="mt-2 text-white getReportBtn" (click)="getReportPerDay()">Get Report</button>
+        </div>
+      </mat-card>
     </div>
-    <div class="col-12 col-md-7">
-      <p>Select Report by Range (From a day to another day)</p>
-       <div class="form-inline">
-          <div class="form-group">
-            <label for="">From:</label>
-            <input type="date" class="form-control" name="from" id="" [(ngModel)]="fromDate">
+    <div class="col-12 col-md-4 mt-2" *ngIf="showForUnitId">
+      <mat-card>
+        <div>
+          <p>Select Report by Range (From a day to another day)</p>
+          <div class="row">
+            <div class="col-3">
+              <label for="">From:</label>
+            </div>
+            <div class="col-9">
+              <input type="date" class="form-control ml-2" name="from" id="" [(ngModel)]="fromDate">
+            </div>
           </div>
-
-          <div class="form-group">
-            <label for="">To:</label>
-            <input type="date" class="form-control" name="To" id="" [(ngModel)]="toDate">
+          <div class="row mt-2">
+            <div class="col-3">
+              <label for="">To:</label>
+            </div>
+            <div class="col-9">
+              <input type="date" class="form-control ml-2" name="To" id="" [(ngModel)]="toDate">
+            </div>
           </div>
-       </div>
-       <button class="btn btn-dark" (click)="getReportPerRange()">Get Report</button>
+          <div class="row mx-auto justify-content-center">
+            <button mat-raised-button class="mt-2 text-white getReportBtn" (click)="getReportPerRange()">Get Report</button>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-md-5 text-center mx-auto">
+      <p>{{info}}</p>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12 col-md-6" *ngIf="show">
       <table class="table table-light table-striped table-hover">
-        <thead class="thead-dark">
+        <thead class="text-white getReportBtn">
           <tr>
             <th>Transport Image</th>
             <th>Transport Means</th>
@@ -47,14 +63,38 @@
         </thead>
         <tbody>
           <tr *ngFor="let report of totalReport">
-            <td>
-              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" class="w-25" alt="">
+            <td class="bg-danger" width="50%">
+              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" width="30%" alt="">
             </td>
             <td>{{report.transport_name}}</td>
             <td>{{report.value}}</td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col-12 col-md-6">
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6" *ngIf="showForRange">
+      <table class="table table-light table-striped table-hover">
+        <thead class="text-white getReportBtn">
+          <tr>
+            <th>Days</th>
+            <th>Total Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of totalRangeReport">
+            <td>{{report.day}}</td>
+            <td>{{report.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 col-md-6">
+      <canvas id="chartForRange" width="400" height="200"></canvas>
     </div>
   </div>
 </div>

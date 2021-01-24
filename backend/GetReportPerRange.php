@@ -9,7 +9,7 @@
     $unit_id = $_POST->unit_id;
 
     $report = new Report;
-    $insert = $report->getReportPerRange($fromDate, $toDate);
+    $insert = $report->getReportPerRange($fromDate, $toDate, $unit_id);
     $response = [];
     if ($insert) {
         $getReport = $report->res['fetched'];

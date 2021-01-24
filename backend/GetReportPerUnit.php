@@ -5,8 +5,9 @@
     $_POST = json_decode(file_get_contents("php://input"));
 
     $date = $_POST->date;
+    $unit_id = $_POST->unit_id;
     $report = new Report;
-    $insert = $report->getReportPerUnit($date);
+    $insert = $report->getReportPerUnit($date, $unit_id);
     $response = [];
     if ($insert) {
         $getReport = $report->res['fetched'];
