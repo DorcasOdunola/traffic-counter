@@ -38,6 +38,8 @@ export class ReportComponent implements OnInit {
   public reportRangeArray = [];
   public totalRangeReport = [];
   public color = [];
+  public displayDay = false;
+  public displayRange = false;
 
   forDate(date = ""){
     return date ? new Date(date) : new Date()
@@ -60,6 +62,17 @@ export class ReportComponent implements OnInit {
     })
   }
 
+  // Function Selecting report type
+  reportType(event) {
+    let value = event.value;
+    if (value == "day") {
+       this.displayDay = true;
+       this.displayRange = false;
+    } else if (value == "range") {
+      this.displayRange = true;
+      this.displayDay = false;
+    }
+  }
   // Function getting report for each unit by default
   getReportForUnit(event) {
     this.unit_id = event.value;
@@ -108,6 +121,7 @@ export class ReportComponent implements OnInit {
   // FUNCTION FOR FILTERING THE ALL REPORT
   getTotalReport (reportArray) {
     this.totalReport = [];
+    this.color = [];
     reportArray.map(report => {
       let find = this.totalReport.findIndex(find => find.transport_id == report.transport_id);
       if (find >= 0) {

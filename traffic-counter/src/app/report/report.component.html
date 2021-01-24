@@ -10,17 +10,15 @@
         </mat-form-field>
       </mat-card>
     </div>
-    <div class="col-12 col-md-4 mt-2" *ngIf="showForUnitId">
-      <mat-card>
+    <div class="col-12 col-md-5 mt-2">
+      <mat-card class="" *ngIf="displayDay">
         <span>Select a date to the get the report for that day and for this unit </span>
         <span><input type="date" class="form-control" name="date" [(ngModel)]="selectDate" ></span>
         <div class="row mx-auto justify-content-center">
           <button mat-raised-button class="mt-2 text-white getReportBtn" (click)="getReportPerDay()">Get Report</button>
         </div>
       </mat-card>
-    </div>
-    <div class="col-12 col-md-4 mt-2" *ngIf="showForUnitId">
-      <mat-card>
+      <mat-card class="" *ngIf="displayRange">
         <div>
           <p>Select Report by Range (From a day to another day)</p>
           <div class="row">
@@ -45,6 +43,17 @@
         </div>
       </mat-card>
     </div>
+    <div class="col-12 col-md-3 mt-2 mx-auto" *ngIf="showForUnitId">
+      <mat-card class="">
+        <mat-form-field appearance="legacy" class="w-100">
+          <mat-label>Select Report Type(per day or Range)</mat-label>
+          <mat-select name="report" (selectionChange)="reportType($event)">
+              <mat-option value="day">Check report for a day</mat-option>
+              <mat-option value="range">Check report per Range (From a day to another day)</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card>
+    </div>
   </div>
   <div class="row">
     <div class="col-12 col-md-5 text-center mx-auto">
@@ -63,8 +72,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let report of totalReport">
-            <td class="bg-danger" width="50%">
-              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" width="30%" alt="">
+            <td class="" width="50%">
+              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" width="20%" alt="">
             </td>
             <td>{{report.transport_name}}</td>
             <td>{{report.value}}</td>

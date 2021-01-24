@@ -34,12 +34,12 @@
                     <img src="http://localhost/trafficCounter/backend/uploads/{{transport.transport_img}}" class="w-25" alt="">
                 </div>
                 <div class="col-3">{{transport.transport_name}}</div>
-                <div class="col-2">{{value}}</div>
+                <div class="col-2">{{transport.value == undefined ? 0: transport.value}}</div>
                 <div class="col-2">
                     <button class="btn btn-dark mb-2 shadow-sm btn-sm" (click)="increaseCount(transport.transport_id)"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-dark mb-2 shadow-sm btn-sm"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-dark mb-2 shadow-sm btn-sm" (click)="decreaseCount(transport.transport_id)"><i class="fa fa-minus"></i></button>
                 </div>
             </div>
         </div>
