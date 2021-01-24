@@ -37,7 +37,7 @@ export class ReportComponent implements OnInit {
   public rangeArray = [];
   public reportRangeArray = [];
   public totalRangeReport = [];
-  // public forDate = new Date();
+  public color = [];
 
   forDate(date = ""){
     return date ? new Date(date) : new Date()
@@ -117,6 +117,11 @@ export class ReportComponent implements OnInit {
         this.totalReport.push(report); 
       }
     })
+    this.totalReport.map(forcolor => {
+      let eachcolor = this.generatingColor();
+      this.color.push(eachcolor);
+    })
+    console.log(this.color)
     this.forTrans = [];
     this.forValue = [];
     this.totalReport.map(each => {
@@ -149,6 +154,16 @@ export class ReportComponent implements OnInit {
         }
       }
     })
+  }
+
+  // Function generating random colors
+  generatingColor() {
+   let red = Math.floor(Math.random() * 251);
+   let green = Math.floor(Math.random() * 251);
+   let blue = Math.floor(Math.random() * 251);
+   let alpha = Math.floor((Math.random() * 1 + 1));
+   let color = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+   return color;
   }
 
   // Function filtering and getting value for report per range(day -> total count)
@@ -199,26 +214,17 @@ export class ReportComponent implements OnInit {
           datasets: [{
               label: '# of Votes',
               data: this.forValue,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-                  // 'rgba(255, 159, 50, 0.2)',
-                  // 'rgba(255, 150, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)',
-                  // 'rgba(255, 140, 64, 0.2)',
-                  // 'rgba(255, 159, 64, 0.2)'
-              ],
+              backgroundColor: this.color,
+              // borderColor: [
+              //     'rgba(255, 99, 132, 1)',
+              //     'rgba(54, 162, 235, 1)',
+              //     'rgba(255, 206, 86, 1)',
+              //     'rgba(75, 192, 192, 1)',
+              //     'rgba(153, 102, 255, 1)',
+              //     'rgba(255, 159, 64, 1)',
+              //     // 'rgba(255, 140, 64, 0.2)',
+              //     // 'rgba(255, 159, 64, 0.2)'
+              // ],
               borderWidth: 1
           }]
       },
