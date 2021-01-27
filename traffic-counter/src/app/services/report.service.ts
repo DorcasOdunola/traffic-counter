@@ -28,4 +28,8 @@ export class ReportService {
   public getReportPerRange(dateObj) {
     return this.httpClient.post<any>(`${this.baseUrl}GetReportPerRange.php`, dateObj)
   }
+
+  public getReportPerTime(timeObj) {
+    return this.httpClient.post<any>(`${this.baseUrl}GetReportPerTime.php`, timeObj)
+  }
 }

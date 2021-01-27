@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { UnitService } from '../services/unit.service';
 import { Chart } from 'chart.js'
-import { find } from 'rxjs/operators';
-import { range } from 'rxjs';
+import { TransportService } from '../services/transport.service';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { ValueTransformer } from '@angular/compiler/src/util';
 // import {Chart} from 'chart.js'
 
 @Component({
@@ -13,7 +14,7 @@ import { range } from 'rxjs';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(public unitService: UnitService, public reportService: ReportService) { }
+  constructor(public unitService: UnitService, public reportService: ReportService, public transportService: TransportService) { }
 
   public noOfUnit = "";
   public noOfCentalUnit = "";
@@ -40,14 +41,28 @@ export class ReportComponent implements OnInit {
   public color = [];
   public displayDay = false;
   public displayRange = false;
+  public forDays = [];
+  public timeArray = [];
+  public totalValue = [];
+  public timeValue = [];
+  public transPerRange =  [];
+  public forTransRange = [];
+  public forTransValue = [];
+
 
   forDate(date = ""){
     return date ? new Date(date) : new Date()
   }
   ngOnInit(): void {
-    // let date = this.forDate('1/1/2001');
-    // console.log(date.getDay());
+    let date = this.forDate();
+    this.dDate = date.toLocaleDateString();
     this.getAllUnit();
+    this.info = `No Report Yet. Select a unit of a your choice to check report for ${this.dDate}`;
+
+    document.getElementById("chartForRange").style.display = "none";
+    document.getElementById("transChart").style.display = "none";
+    document.getElementById("timeChart").style.display = "none";
+    document.getElementById("chartForTransRange").style.display = "none";
   }
 
   // Function getting all unit
@@ -59,6 +74,27 @@ export class ReportComponent implements OnInit {
       let filteredSubUnit = data.filter(unit => unit.status == "Sub-Unit");
       this.noOfCentalUnit = filteredCentral.length;
       this.noOfSubUnit = filteredSubUnit.length;
+    })
+  }
+
+  // function getting all transport means
+  getAllTransport(unit_id) {
+    this.forTrans = [];
+    this.forValue = [];
+    this.totalReport = [];
+    this.transportService.getTrans(unit_id).subscribe(data => {
+      console.log(data);
+      data.map(each => {
+        each.value = 0;
+        this.totalReport.push(each)
+      })
+      this.totalReport.map(each => {
+        this.forTrans.push(each.transport_name);
+        this.forValue.push(each.value);
+      })
+      this.drawChart();
+      console.log(this.forTrans);
+      console.log(this.totalReport);
     })
   }
 
@@ -88,9 +124,15 @@ export class ReportComponent implements OnInit {
         this.reportArray = data;
         console.log(this.reportArray)
         if (this.reportArray.length != 0) {
+          document.getElementById("transChart").style.display = "block";
+          document.getElementById("timeChart").style.display = "block";
           this.getTotalReport(this.reportArray);
+          this.getReportperTime(this.dDate);
+          this.info = `Report for ${this.dDate}(In Tables and Chart)`;
         } else {
-          this.info = `No Report Yet. Select a unit of a your choice to check report for ${dDate}`
+          this.getAllTransport(this.unit_id);
+          this.show = true;
+          this.info = `No Report in this unit for ${dDate}`;
         }
       }
     })
@@ -98,6 +140,8 @@ export class ReportComponent implements OnInit {
   
   // FUNCTION FOR GETTING REPORT FOR UNIT FOR THE DAY SELECTED
   getReportPerDay() {
+    this.forTrans = [];
+    this.forValue = [];
     let date = new Date(this.selectDate);
     let dDate = date.toLocaleDateString();
     let obj = {date: dDate, unit_id: this.unit_id};
@@ -108,11 +152,21 @@ export class ReportComponent implements OnInit {
         console.log(data);
         this.reportArray = data;
         if (this.reportArray.length != 0) {
+          document.getElementById("transChart").style.display = "block";
+          document.getElementById("timeChart").style.display = "block";
+          // document.getElementById("transChart").innerHTML = "nnnnn";
+          // document.getElementById("timeChart").innerHTML = "nnnnnn";
+          document.getElementById("chartForRange").style.display = "none";
+          document.getElementById("chartForTransRange").style.display = "none";
           this.show == true;
-          this.getTotalReport(this.reportArray)
+          this.showForRange = false;
+          this.getTotalReport(this.reportArray);
+          this.info = `Report for ${dDate}(In Tables and Chart)`;
+          this.getReportperTime(dDate)
         } else {
           this.info = `No Report in this unit for this day-${dDate}`
-          this.show = false;
+          this.getAllTransport(this.unit_id);
+          this.show = true;
         }
       }
     })
@@ -161,7 +215,12 @@ export class ReportComponent implements OnInit {
       } else {
         let rangeArray = data;
         if (rangeArray.length != 0) {
+          document.getElementById("chartForRange").style.display = "block";
+          document.getElementById("chartForTransRange").style.display = "block";
+          document.getElementById("transChart").style.display = "none";
+          document.getElementById("timeChart").style.display = "none";
           this.getTotalReportPerRange(rangeArray);
+          this.info = `Report for ${fromDate} to ${toDate}(In Tables and Chart)`;
         } else {
           this.info = `No Report in this unit from -${fromDate} to ${toDate}`
           this.show = false;
@@ -182,6 +241,7 @@ export class ReportComponent implements OnInit {
 
   // Function filtering and getting value for report per range(day -> total count)
   getTotalReportPerRange(reportArray){
+    this.totalRangeReport = [];
     let totalRangeReport = [];
     reportArray.map((report, i) => {
       let date = this.forDate(report.day_date);
@@ -189,13 +249,20 @@ export class ReportComponent implements OnInit {
       let theDate = this.days[dateIndex];
       reportArray[i].day = theDate;
     })
-    console.log(reportArray);
     reportArray.map(reprt => {
       let find = totalRangeReport.findIndex(find => (find.day) == (reprt.day));
         if (find >= 0) {
           totalRangeReport[find].value = Number(totalRangeReport[find].value) + Number(reprt.value);
         } else {
           totalRangeReport.push(reprt);
+        }
+    })
+    reportArray.map(reprt => {
+      let find = this.transPerRange.findIndex(find => (find.transport_id) == (reprt.transport_id));
+        if (find >= 0) {
+          this.transPerRange[find].value = Number(this.transPerRange[find].value) + Number(reprt.value);
+        } else {
+          this.transPerRange.push(reprt);
         }
     })
     this.days.map(day => {
@@ -208,52 +275,129 @@ export class ReportComponent implements OnInit {
       }
     })
     this.forValue = [];
-    this.forTrans = [];
-    console.log(this.totalRangeReport);
+    this.forDays = [];
     this.totalRangeReport.map(rprt => {
-      this.forTrans.push(rprt.day);
+      this.forDays.push(rprt.day);
       this.forValue.push(rprt.value);
+    })
+    this.transPerRange.map(rprt => {
+      this.forTransRange.push(rprt.transport_name);
+      this.forTransValue.push(rprt.value);
     })
     this.showForRange = true;
     this.show = false;
     this.drawChatForRange();
+    this.drawChartForTransRange();
+  }
+  // Function getting report for a unit per time
+  getReportperTime(dDate) {
+    let timeObj ={date: dDate, unit_id: this.unit_id};
+    console.log(timeObj);
+    let timeArray = [];
+    this.reportService.getReportPerTime(timeObj).subscribe(data => {
+      timeArray = data;
+      timeArray.map((each, i) => {
+        let dateTime = this.forDate(timeArray[i].time);
+        let holdHour =  dateTime.getHours();
+        let holdMinute = dateTime.getMinutes();
+        let holdTime = `${holdHour}:${holdMinute}`;
+        let converttoTime = dateTime.toLocaleTimeString();
+        timeArray[i].holdHour = holdHour;
+        timeArray[i].convertTime = converttoTime;
+        // if (timeArray[i].holdHour <= 12 || timeArray[i].holdHour =) {
+          
+        // } else if () {
+          
+        // }
+      })
+      // timeArray.m
+      console.log(timeArray);
+      // timeArray.map(each => {
+      //   let find = this.timeArray.findIndex(find => find.convertTime == each.convertTime);
+      //   if (find >= 0) {
+      //     this.timeArray[find].value = Number(this.timeArray[find].value) + Number(each.value);
+      //   } else {
+      //     this.timeArray.push(each);
+      //   }
+      // })
+      // this.totalValue = [];
+      // this.timeValue = [];
+      // this.timeArray.map(time => {
+      //   this.totalValue.push(time.convertTime);
+      //   this.timeValue.push(time.value);
+      // })
+      // this.drawChartForTime();
+      // this.generatingColor();
+      // console.log(this.timeArray);
+    })
   }
 
+  // Chart for transport means against their total value(count)
   drawChart () {      
-    let ctx = document.getElementById('myChart');
+    let ctx = document.getElementById('transChart');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
           labels: this.forTrans,
           datasets: [{
-              label: '# of Votes',
+              label: '# of Traffic-Count-Distribution',
               data: this.forValue,
               backgroundColor: this.color,
-              // borderColor: [
-              //     'rgba(255, 99, 132, 1)',
-              //     'rgba(54, 162, 235, 1)',
-              //     'rgba(255, 206, 86, 1)',
-              //     'rgba(75, 192, 192, 1)',
-              //     'rgba(153, 102, 255, 1)',
-              //     'rgba(255, 159, 64, 1)',
-              //     // 'rgba(255, 140, 64, 0.2)',
-              //     // 'rgba(255, 159, 64, 0.2)'
-              // ],
               borderWidth: 1
           }]
       },
       options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
+        // event: ['onHover'],
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
       }
     }); 
   }
 
+  // Function drawing chart for transport means against their total value per range
+  drawChartForTransRange() {
+    let ctx = document.getElementById('chartForTransRange');
+      console.log(this.show, "SHOW VALUE")
+      console.log(ctx, "CTX")
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: this.forTransRange,
+            datasets: [{
+                label: '# of Traffic-Count-Distribution',
+                data: this.forTransValue,
+                backgroundColor: this.color,
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    // 'rgba(255, 140, 64, 0.2)',
+                    // 'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+     }); 
+  }
+
+  // Function drawing chart for transport means against their total Value(count) per range in days
   drawChatForRange() {
     let ctx = document.getElementById('chartForRange');
     console.log(this.show, "SHOW VALUE")
@@ -261,20 +405,21 @@ export class ReportComponent implements OnInit {
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: this.forTrans,
+          labels: this.forDays,
           datasets: [{
-              label: '# of Votes',
+              label: '# of Traffic-Count-Distribution',
               data: this.forValue,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-                  // 'rgba(255, 159, 50, 0.2)',
-                  // 'rgba(255, 150, 64, 0.2)'
-              ],
+              backgroundColor: this.color,
+              // [
+              //     'rgba(255, 99, 132, 0.2)',
+              //     'rgba(54, 162, 235, 0.2)',
+              //     'rgba(255, 206, 86, 0.2)',
+              //     'rgba(75, 192, 192, 0.2)',
+              //     'rgba(153, 102, 255, 0.2)',
+              //     'rgba(255, 159, 64, 0.2)'
+              //     // 'rgba(255, 159, 50, 0.2)',
+              //     // 'rgba(255, 150, 64, 0.2)'
+              // ],
               borderColor: [
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
@@ -297,19 +442,44 @@ export class ReportComponent implements OnInit {
               }]
           }
       }
+   }); 
+  }
+
+  // function drawing the chart for total value of count against time
+  drawChartForTime() {
+    let ctx = document.getElementById('timeChart');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: this.totalValue,
+          datasets: [{
+              label: '# of Traffic-Count-Distribution',
+              data: this.timeValue,
+              backgroundColor: this.color,
+              borderColor: [
+                  // 'rgba(255, 99, 132, 1)',
+                  // 'rgba(54, 162, 235, 1)',
+                  // 'rgba(255, 206, 86, 1)',
+                  // 'rgba(75, 192, 192, 1)',
+                  // 'rgba(153, 102, 255, 1)',
+                  // 'rgba(255, 159, 64, 1)',
+                  // 'rgba(255, 140, 64, 0.2)',
+                  // 'rgba(255, 159, 64, 0.2)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
   }); 
 
   }
-
-  // tabChanged(e){
-  //   // console.log(e);
-  //   this.selectedIndex = e;
-  //   this.unit_id = this.unitArray[e].unit_id;
-  // }
-
-  // createDay() {
-  //   let date = new Date();
-  //   this.dDate = date.toLocaleDateString();
-  // }
 
 }

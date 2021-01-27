@@ -46,7 +46,7 @@ export class CountComponent implements OnInit {
     setInterval(()=> {
       this.getTrans();
       this.getAllReport();
-    }, 2000000)
+    }, 60000)
   }
 
   getTrans() {
@@ -126,6 +126,13 @@ export class CountComponent implements OnInit {
         localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
       }
     }
+    let getCheck = JSON.parse(localStorage.getItem("CountArray"));
+    getCheck.map(report => {
+      let findIndex = this.transArray.findIndex(trans => trans.transport_id == report.transport_id);
+      if (findIndex >= 0) {
+        this.transArray[findIndex].value = report.value
+      }
+    })
     console.log(this.saveCountArray);
   }
 

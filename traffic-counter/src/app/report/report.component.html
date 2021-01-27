@@ -82,7 +82,8 @@
       </table>
     </div>
     <div class="col-12 col-md-6">
-      <canvas id="myChart" width="400" height="200"></canvas>
+      <canvas id="transChart" width="400" height="200"></canvas>
+      <canvas id="timeChart" width="400" height="200"></canvas>
     </div>
   </div>
   <div class="row">
@@ -90,13 +91,17 @@
       <table class="table table-light table-striped table-hover">
         <thead class="text-white getReportBtn">
           <tr>
-            <th>Days</th>
+            <th>Transport Image</th>
+            <th>Transport Means</th>
             <th>Total Count</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let report of totalRangeReport">
-            <td>{{report.day}}</td>
+          <tr *ngFor="let report of transPerRange">
+            <td class="" width="50%">
+              <img src="http://localhost/trafficCounter/backend/uploads/{{report.transport_img}}" width="20%" alt="">
+            </td>
+            <td>{{report.transport_name}}</td>
             <td>{{report.value}}</td>
           </tr>
         </tbody>
@@ -104,6 +109,7 @@
     </div>
     <div class="col-12 col-md-6">
       <canvas id="chartForRange" width="400" height="200"></canvas>
+      <canvas id="chartForTransRange" width="400" height="200"></canvas>
     </div>
   </div>
 </div>

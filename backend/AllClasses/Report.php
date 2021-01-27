@@ -34,6 +34,12 @@
             $binder = array('sss', $fromDate, $toDate, $unit_id);
             return $this->selectSome($query, $binder);
         }
+
+        public function getReportPerTime($date, $unit_id) {
+            $query = "SELECT report_id, value, time, transport_id, transport_name,transport_img, report.unit_id as unit_id, day_id, day_date FROM report JOIN unit USING (unit_id) JOIN transport USING (transport_id) JOIN day USING (day_id) WHERE day_date = ? AND report.unit_id = ?";
+            $binder = array('ss', $date, $unit_id);
+            return $this->selectSome($query, $binder);
+        }
     }
 
 
