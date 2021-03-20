@@ -1,3 +1,72 @@
-<div>
-  <p>Mydashh</p>
+<div class="container-fluid wrapper">
+  <div class="row">
+      <div class="col-12 col-md-3 mx-auto p-4">
+          <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <span class="mt-5 icons"><i class="fas fa-school"></i></span>
+                  </div>
+                  <div class="col-9 text-right">
+                    <span class="h3 text">{{noOfUnit}}</span><br>
+                    <span><small><b>Total No of Unit</b></small></span>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+      </div>
+
+      <div class="col-12 col-md-3 mx-auto p-4">
+          <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-3 my-auto">
+                      <span class="mt-5 icons"><i class="fas fa-user-plus"></i></span>
+                  </div>
+                  <div class="col-9 text-right">
+                      <span class="h3 text">{{noOfUser}}</span><br>
+                      <span><small>Total No of Users</small></span>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+      </div>
+
+      <div class="col-12 col-md-3 mx-auto p-4">
+          <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-3 my-auto">
+                      <span class="mt-5 icons"><i class="fas fa-coins"></i></span>
+                  </div>
+                  <div class="col-9 text-right">
+                      <span class="h3 text">{{countForUnit}}</span><br>
+                      <span><small>Count for {{date}}</small></span>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+      </div>
+
+      <div class="col-12 col-md-3 mx-auto p-4">
+          <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-3 my-auto">
+                      <span class="mt-5 icons"><i class="fas fa-map-marker-alt"></i></span>
+                  </div>
+                  <div class="col-9 text-right">
+                      <span class="h3 text">0</span><br>
+                      <span><small>All Unit Count for {{date}}</small></span>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+      </div>
+  </div>
+  <!-- <div class="row w-100 ml-md-1 p-1">
+      <div class="col-12 mx-auto">
+          <canvas id="myChart" width="400" height="100"></canvas>
+      </div>
+  </div> -->
 </div>

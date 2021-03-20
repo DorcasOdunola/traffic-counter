@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ResetpassDialogComponent } from '../resetpass-dialog/resetpass-dialog.component';
 import { LoginService } from '../services/login.service';
 import { UnitService } from '../services/unit.service';
@@ -15,7 +16,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 })
 export class AdminProfileComponent implements OnInit {
 
-  constructor(public userService: UserService, public formBuilder: FormBuilder, public unitService: UnitService, public snackbar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(public userService: UserService, public formBuilder: FormBuilder, public unitService: UnitService, public snackbar: MatSnackBar, public dialog: MatDialog, public router: Router) { }
   public disabled = true;
   public userForm = this.formBuilder.group({
     firstName: ['',],
@@ -39,7 +40,8 @@ export class AdminProfileComponent implements OnInit {
     this.unitService.getUnit().subscribe(data => {
       this.unitArray = data;
     })
-    this.userService.getProfile().subscribe(data => {
+    this.userService.getProfile().subscribe(
+      data => {
       this.userForm.controls["firstName"].setValue(data.first_name);
       this.userForm.controls["lastName"].setValue(data.last_name);
       this.userForm.controls["surname"].setValue(data.surname);
@@ -48,8 +50,12 @@ export class AdminProfileComponent implements OnInit {
       this.userForm.controls["address"].setValue(data.address);
       this.userForm.controls["status"].setValue(data.status);
       this.userForm.controls["unitId"].setValue(data.unit_id);
-      this.image = `http://localhost/trafficCounter/backend/uploads/${data.image}`;
-    })
+      this.image = `http://localhost/trafficCounter/backend/uploads/${data.image}`
+    }, error => {
+      if (error) {
+        this.router.navigate(["/login"]);
+      }
+    });
     this.userForm.disable();
   }
 

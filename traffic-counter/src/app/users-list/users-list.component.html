@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid wrapper">
   <div class="row" *ngIf="!seen">
     <div class="col-3 mx-auto">
       <p class="display-4 text-center">LOADING.....</p>
@@ -7,6 +7,9 @@
   <div class="row" *ngIf="seen">
     <div class="col-12 col-md-6 mx-auto">
       <input type="text" class="form-control mt-2" placeholder="Search Staff" [(ngModel)]="userSearch">
+    </div>
+    <div class="sticky">
+      <button mat-raised-button routerLink="/adduser">Add User</button> 
     </div>
   </div> 
   <div class="row mt-4 p-0">

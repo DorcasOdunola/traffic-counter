@@ -48,6 +48,8 @@ export class ReportComponent implements OnInit {
   public transPerRange =  [];
   public forTransRange = [];
   public forTransValue = [];
+  public times = ["12:00AM-04:00AM", "04:00AM-08:00AM", "08:00AM-12:00AM", "12:00PM-04:00PM", "04:00PM-08:00PM", "08:00PM-12:00AM"];
+  public finalTimeArray = [];
 
 
   forDate(date = ""){
@@ -276,6 +278,8 @@ export class ReportComponent implements OnInit {
     })
     this.forValue = [];
     this.forDays = [];
+    this.forTransRange = [];
+    this.forTransValue = [];
     this.totalRangeReport.map(rprt => {
       this.forDays.push(rprt.day);
       this.forValue.push(rprt.value);
@@ -301,34 +305,51 @@ export class ReportComponent implements OnInit {
         let holdHour =  dateTime.getHours();
         let holdMinute = dateTime.getMinutes();
         let holdTime = `${holdHour}:${holdMinute}`;
-        let converttoTime = dateTime.toLocaleTimeString();
         timeArray[i].holdHour = holdHour;
-        timeArray[i].convertTime = converttoTime;
-        // if (timeArray[i].holdHour <= 12 || timeArray[i].holdHour =) {
-          
-        // } else if () {
-          
-        // }
+        timeArray[i].convertTime = holdTime;
+
+        if (timeArray[i].holdHour >=0 && timeArray[i].holdHour <=3) {
+          timeArray[i].range = "12:00AM-4:00AM";
+        } else if (timeArray[i].holdHour >=4 && timeArray[i].holdHour <=7) {
+          timeArray[i].range = "04:00AM-08:00AM";
+        } else if (timeArray[i].holdHour >=8 && timeArray[i].holdHour <=11) {
+          timeArray[i].range = "08:00AM-12:00AM";
+        } else if (timeArray[i].holdHour >=12 && timeArray[i].holdHour <=15) {
+          timeArray[i].range = "12:00PM-04:00PM";
+        } else if (timeArray[i].holdHour >=16 && timeArray[i].holdHour <=19) {
+          timeArray[i].range = "04:00PM-08:00PM";
+        } else if (timeArray[i].holdHour >=20 && timeArray[i].holdHour <=23) {
+          timeArray[i].range = "08:00PM-12:00AM";
+        }
       })
-      // timeArray.m
       console.log(timeArray);
-      // timeArray.map(each => {
-      //   let find = this.timeArray.findIndex(find => find.convertTime == each.convertTime);
-      //   if (find >= 0) {
-      //     this.timeArray[find].value = Number(this.timeArray[find].value) + Number(each.value);
-      //   } else {
-      //     this.timeArray.push(each);
-      //   }
-      // })
-      // this.totalValue = [];
-      // this.timeValue = [];
-      // this.timeArray.map(time => {
-      //   this.totalValue.push(time.convertTime);
-      //   this.timeValue.push(time.value);
-      // })
-      // this.drawChartForTime();
-      // this.generatingColor();
-      // console.log(this.timeArray);
+      timeArray.map(each => {
+        let find = this.timeArray.findIndex(find => find.range == each.range);
+        if (find >= 0) {
+          this.timeArray[find].value = Number(this.timeArray[find].value) + Number(each.value);
+        } else {
+          this.timeArray.push(each);
+        }
+      })
+      console.log(this.timeArray);
+      this.times.map(time => {
+        let findObj = this.timeArray.find(find => find.range == time);
+        if (findObj) {
+          this.finalTimeArray.push(findObj)
+        } else {
+          let obj = {time, value: 0};
+          this.finalTimeArray.push(obj)
+        }
+      })
+      this.totalValue = [];
+      this.timeValue = [];
+      this.finalTimeArray.map(time => {
+        this.totalValue.push(time.range);
+        this.timeValue.push(time.value);
+      })
+      this.drawChartForTime();
+      this.generatingColor();
+      console.log(this.finalTimeArray);
     })
   }
 
@@ -373,12 +394,12 @@ export class ReportComponent implements OnInit {
                 data: this.forTransValue,
                 backgroundColor: this.color,
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
+                    // 'rgba(255, 99, 132, 1)',
+                    // 'rgba(54, 162, 235, 1)',
+                    // 'rgba(255, 206, 86, 1)',
+                    // 'rgba(75, 192, 192, 1)',
+                    // 'rgba(153, 102, 255, 1)',
+                    // 'rgba(255, 159, 64, 1)',
                     // 'rgba(255, 140, 64, 0.2)',
                     // 'rgba(255, 159, 64, 0.2)'
                 ],
@@ -389,7 +410,7 @@ export class ReportComponent implements OnInit {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                      beginAtZero: true
                     }
                 }]
             }
@@ -451,7 +472,7 @@ export class ReportComponent implements OnInit {
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: this.totalValue,
+          labels: this.times,
           datasets: [{
               label: '# of Traffic-Count-Distribution',
               data: this.timeValue,

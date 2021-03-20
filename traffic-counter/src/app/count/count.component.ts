@@ -151,8 +151,16 @@ export class CountComponent implements OnInit {
         this.saveCountArray[findIndex].value = this.saveCountArray[findIndex].value-=1;
         localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
       }
+    } else {
+      return;
     }
-    console.log(this.saveCountArray);
+    let getCheck = JSON.parse(localStorage.getItem("CountArray"));
+    getCheck.map(report => {
+      let findIndex = this.transArray.findIndex(trans => trans.transport_id == report.transport_id);
+      if (findIndex >= 0) {
+        this.transArray[findIndex].value = report.value
+      }
+    })
   }
 
 

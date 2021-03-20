@@ -32,4 +32,9 @@ export class ReportService {
   public getReportPerTime(timeObj) {
     return this.httpClient.post<any>(`${this.baseUrl}GetReportPerTime.php`, timeObj)
   }
+
+  
+  public getReportForAllUnit(timeObj) {
+    return this.httpClient.post<any>(`${this.baseUrl}getReportForAllUnit.php`, timeObj)
+  }
 }

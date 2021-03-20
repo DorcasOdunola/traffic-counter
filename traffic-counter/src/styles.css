@@ -16,3 +16,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   /* color: rgba(0,0,0,.54); */
   color: white !important;
 }
+
+.wrapper {
+  /* height: 100vh; */
+  margin-top: 15%;
+}
+
+.sticky {
+  position: sticky;
+  top: 100px;
+  z-index: 1000;
+  margin-left: 70%;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-top: 5.5%;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 100px;
+    z-index: 1000;
+    margin-left: 91%;
+  }
+}
+
+
+

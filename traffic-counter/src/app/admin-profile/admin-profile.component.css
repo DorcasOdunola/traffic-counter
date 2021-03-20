@@ -8,3 +8,24 @@
    cursor: pointer;
    background-color: rgba(4,4,44, 1)
 }
+
+.prfPic {
+  width: 100px;
+  height: 100px;
+}
+
+.editBtn {
+    background-color: rgba(4,4,44, 1);
+    height: 70px;
+    width: 70px;
+    position: sticky !important; 
+	bottom: 100px !important;
+	/* left: 93%; */
+}
+  
+@media only screen and (min-width: 768px) {
+    .prfPic {
+        width: 200px;
+        height: 200px;
+    }
+}

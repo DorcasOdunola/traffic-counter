@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid wrapper">
   <div class="row" *ngIf="!seen">
     <div class="col-3 mx-auto">
       <p class="display-4 text-center">LOADING.....</p>
@@ -8,6 +8,9 @@
       <div class="col-12 col-md-6 border-top-0 mx-auto">
         <input type="text" class="form-control mt-2" placeholder="Search Unit" [(ngModel)]="unitSearch">
       </div>
+    </div>
+    <div class="sticky">
+      <button mat-raised-button routerLink="/createunit">Add Unit</button> 
     </div>
     <table class="table table-responsive-md">
       <thead>
