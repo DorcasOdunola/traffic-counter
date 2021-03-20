@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   public date;
   public reportArrayForUnit = [];
   public countForUnit = 0;
+  public reportArrayForAllUnit = [];
+  public countForAllUnit = 0;
 
   ngOnInit(): void {
     this.getAllUnit();
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
     this.getDate();
     this.getTotalCount();
     this.getReportForAllUnit();
+
   }
 
   getDate() {
@@ -63,13 +66,13 @@ export class DashboardComponent implements OnInit {
 
   getReportForAllUnit() {
     let obj = {date: this.date}
-    this.reportService.getReportForAllUnit(this.date).subscribe(data => {
+    this.reportService.getReportForAllUnit(obj).subscribe(data => {
       console.log(data);
-      // this.reportArrayForUnit = data;
-      // this.reportArrayForUnit.map(report => {
-      //   this.countForUnit+=Number(report.value);
-      // })
-      // console.log(this.countForUnit)
+      this.reportArrayForAllUnit = data;
+      this.reportArrayForAllUnit.map(report => {
+        this.countForAllUnit+=Number(report.value);
+      })
+      console.log(this.countForAllUnit)
     })
   }
 

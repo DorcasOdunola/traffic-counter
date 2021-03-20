@@ -298,7 +298,7 @@ export class ReportComponent implements OnInit {
     let timeObj ={date: dDate, unit_id: this.unit_id};
     console.log(timeObj);
     let timeArray = [];
-    this.reportService.getReportPerTime(timeObj).subscribe(data => {
+    this.reportService.getReportPerUnit(timeObj).subscribe(data => {
       timeArray = data;
       timeArray.map((each, i) => {
         let dateTime = this.forDate(timeArray[i].time);
