@@ -156,8 +156,6 @@ export class ReportComponent implements OnInit {
         if (this.reportArray.length != 0) {
           document.getElementById("transChart").style.display = "block";
           document.getElementById("timeChart").style.display = "block";
-          // document.getElementById("transChart").innerHTML = "nnnnn";
-          // document.getElementById("timeChart").innerHTML = "nnnnnn";
           document.getElementById("chartForRange").style.display = "none";
           document.getElementById("chartForTransRange").style.display = "none";
           this.show == true;

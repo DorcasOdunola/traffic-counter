@@ -42,7 +42,7 @@
         // }
 
         public function getReportForAllUnit($date) {
-            $query = "SELECT report_id, value, time, transport_id, transport_name,transport_img, report.unit_id as unit_id, day_id, day_date FROM report JOIN unit USING (unit_id) JOIN transport USING (transport_id) JOIN day USING (day_id) WHERE day_date = ?";
+            $query = "SELECT report_id, value, time, transport_id, transport_name,transport_img, report.unit_id as unit_id, name as unit_name, day_id, day_date FROM report JOIN unit USING (unit_id) JOIN transport USING (transport_id) JOIN day USING (day_id) WHERE day_date = ?";
             $binder = array('s', $date);
             return $this->selectSome($query, $binder);
         }

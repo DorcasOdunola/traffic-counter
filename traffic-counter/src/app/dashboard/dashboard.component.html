@@ -41,7 +41,7 @@
                   </div>
                   <div class="col-9 text-right">
                       <span class="h3 text">{{countForUnit}}</span><br>
-                      <span><small>Count for {{date}}</small></span>
+                      <span><small>{{adminUnit}}'s Count for {{date}}</small></span>
                   </div>
                 </div>
               </mat-card-content>
@@ -64,9 +64,13 @@
           </mat-card>
       </div>
   </div>
-  <!-- <div class="row w-100 ml-md-1 p-1">
-      <div class="col-12 mx-auto">
-          <canvas id="myChart" width="400" height="100"></canvas>
+  <div class="row w-100 ml-md-1 p-1">
+      <div class="col-6 mx-auto">
+        <canvas id="chartForTransCount" width="400" height="200"></canvas>
       </div>
-  </div> -->
+
+      <div class="col-6 mx-auto">
+        <canvas id="chartForUnitCount" width="400" height="200"></canvas>
+      </div>
+  </div>
 </div>
