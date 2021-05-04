@@ -5,63 +5,33 @@
     </div>
   </div>
     <div class="row" *ngIf="seen">
-      <div class="col-12 col-md-6 border-top-0 mx-auto">
+      <div class="col-12 col-md-4 border-top-0 mx-auto">
+        <p>Unit </p>
+      </div>
+      <div class="col-12 col-md-4 border-top-0 mx-auto">
         <input type="text" class="form-control mt-2" placeholder="Search Unit" [(ngModel)]="unitSearch">
       </div>
     </div>
-    <div class="sticky">
+    <div class="sticky mt-1">
       <button mat-raised-button routerLink="/createunit">Add Unit</button> 
     </div>
-    <table class="table table-responsive-md">
-      <thead>
-        <tr class="">
-          <th class="">Unit Name</th>
-          <th class="">Unit Address</th>
-          <th class="">Unit Initials</th>
-          <th class="">Unit Status</th>
-          <th class="">
-            <span>Count Method</span>
-            <span><small>(for Each unit)</small></span>
-          </th>
-          <th class="">Edit</th> 
-          <th class="">Delete</th> 
-        </tr>
-      </thead>
-      <tbody class="" *ngFor="let unit of unitArray | searchUnit: unitSearch">
-          <tr class="shadow-sm rounded mt-2">
-            <td>{{unit.name}}</td>
-            <td>{{unit.address}}</td>
-            <td>{{unit.initials}}</td>
-            <td>{{unit.status}}</td>
-            <td>
-              <span *ngIf="unit.count_interval == '60000'">Keep Count per Minute</span>
-              <span *ngIf="unit.count_interval == '3600000'">Keep Count per Hour</span>
-              <span *ngIf="unit.count_interval == '86400000'">Keep Count per Day</span>
-            </td>
-            <td><button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status, unit.count_interval)">
-              <i class="fas fa-edit"></i>
-            </button></td>
-            <td><button mat-raised-button class="text-danger" (click)="deleteUnit(unit.unit_id)"><i class="fas fa-trash"></i></button></td>
-          </tr>
-      </tbody>
-    </table>
-    <!-- <div class="row">
+    <div class="row mt-2">
       <div class="col-12">
         <mat-card>
           <mat-card-content>
             <div class="row">
               <div class="col-2 text-center mx-auto"><span><b>Unit Name</b></span></div>
               <div class="col-2 text-center mx-auto"> <span><b>Unit Address</b></span></div>
-              <div class="col-2 text-center mx-auto"> <span><b>Unit Initials</b></span></div>
+              <div class="col-1 text-center mx-auto"> <span><b>Initials</b></span></div>
               <div class="col-2 text-center mx-auto"> <span><b>Unit Status</b></span></div>
-              <div class="col-2 text-center mx-auto"> <span><b>Edit</b></span></div> 
-              <div class="col-2 text-center mx-auto"> <span><b>Delete</b></span></div>              
+              <div class="col-2 text-center mx-auto"> <span><b>Count Interval</b></span></div>
+              <div class="col-3 text-center mx-auto"> <span><b>Action</b></span></div>              
             </div>
           </mat-card-content>
         </mat-card>
       </div>
-    </div> -->
-    <!-- <div class="row mt-4 p-0">
+    </div>
+    <div class="row mt-4 p-0">
           <div class="col-12 mb-3" *ngFor="let unit of unitArray | searchUnit: unitSearch">
             <mat-card class="bg-white p-0">
               <mat-card-content>
@@ -76,7 +46,7 @@
                         <span>{{unit.address}}</span><br>
                     </div>
                   </div>
-                  <div class="col-12 col-md-2 mx-auto text-center">
+                  <div class="col-12 col-md-1 mx-auto text-center">
                     <div class="mt-md-3">
                         <span>{{unit.initials}}</span><br>
                     </div>
@@ -86,22 +56,36 @@
                         <span>{{unit.status}}</span><br>
                     </div>
                   </div>
-                  <div class="col-2 mx-auto text-center">
-                    <mat-card-actions>
-                      <button mat-raised-button class="text-primary" (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status)">
+
+                  <div class="col-12 col-md-2 mx-auto text-center">
+                    <div class="mt-md-3">
+                      <span *ngIf="unit.count_interval == '60000'">Keep Count per Minute</span>
+                      <span *ngIf="unit.count_interval == '3600000'">Keep Count per Hour</span>
+                      <span *ngIf="unit.count_interval == '86400000'">Keep Count per Day</span>
+                    </div>
+                  </div>
+
+                  <div class="col-3 mx-auto d-flex justify-content-center">
+                    <mat-card-actions class="mr-3">
+                      <button mat-raised-button (click)="editUnit(unit.unit_id, unit.name, unit.address, unit.initials, unit.status)">
                         <i class="fas fa-edit"></i>
                       </button>
                     </mat-card-actions>
-                  </div>
-                  <div class="col-2 mx-auto text-center">
-                    <mat-card-actions>
-                      <button mat-raised-button class="text-danger" (click)="deleteUnit(unit.unit_id)"><i class="fas fa-trash"></i></button>
+                    <mat-card-actions class="mr-3">
+                      <button mat-raised-button (click)="deleteUnit(unit.unit_id)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </mat-card-actions>
+                    <mat-card-actions class="mr-3">
+                      <button mat-raised-button>
+                        <i class="far fa-eye"></i>
+                      </button>
                     </mat-card-actions>
                   </div>
                 </div>
               </mat-card-content>
           </mat-card>
           </div>
-    </div> -->
+    </div>
 </div>
-   
+

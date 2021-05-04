@@ -9,6 +9,17 @@ tr {
 input {
     box-shadow: none !important;
 }
+button {
+    background-color: rgba(4,4,44, 1) !important;
+    color: white;
+}
+
+button:hover {
+    background-color: rgba(255,255,255, 1) !important;
+    color:  rgba(4,4,44, 1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.5s ease-in-out 0s !important;
+}
 
 /* .sticky {
     position: sticky;
