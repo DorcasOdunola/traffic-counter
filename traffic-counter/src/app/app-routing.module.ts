@@ -31,7 +31,7 @@ const routes: Routes = [
     {path: 'addtransport', component: AddTransportComponent, canActivate: [AdminGuard]},
     {path: 'alluser', component: UsersListComponent, canActivate: [AdminGuard]},
     {path: 'allunit', component: UnitListComponent, canActivate: [AdminGuard]},
-    {path: 'alltransport', component: TransportListComponent, canActivate: [AdminGuard]},
+    {path: 'allunit/:unit_id', component: TransportListComponent, canActivate: [AdminGuard]},
     {path: 'report', component: ReportComponent},
 
   ]}

@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   public arrForUnitcount = [];
   public forUnitCount = [];
   public forUnitCountValue = [];
-  public times = ["12:00AM-04:00AM", "04:00AM-08:00AM", "08:00AM-12:00AM", "12:00PM-04:00PM", "04:00PM-08:00PM", "08:00PM-12:00AM"];
+  public times = ["12:00AM-04:00AM", "04:00AM-08:00AM", "08:00AM-12:00PM", "12:00PM-04:00PM", "04:00PM-08:00PM", "08:00PM-12:00AM"];
   public timeCountValue = [];
   public arrForTimeCount = [];
   public timeCountArray = [];
@@ -174,7 +174,7 @@ export class DashboardComponent implements OnInit {
         } else if (this.timeCountArray[i].holdHour >=4 && this.timeCountArray[i].holdHour <=7) {
           this.timeCountArray[i].range = "04:00AM-08:00AM";
         } else if (this.timeCountArray[i].holdHour >=8 && this.timeCountArray[i].holdHour <=11) {
-          this.timeCountArray[i].range = "08:00AM-12:00AM";
+          this.timeCountArray[i].range = "08:00AM-12:00PM";
         } else if (this.timeCountArray[i].holdHour >=12 && this.timeCountArray[i].holdHour <=15) {
           this.timeCountArray[i].range = "12:00PM-04:00PM";
         } else if (this.timeCountArray[i].holdHour >=16 && this.timeCountArray[i].holdHour <=19) {

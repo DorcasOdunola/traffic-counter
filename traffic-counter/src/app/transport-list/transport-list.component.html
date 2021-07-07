@@ -1,10 +1,94 @@
-<div class="container-fluid p-0">
-    <div class="row w-100">
-        <div class="col-12 col-md-3 border-right">
-            <app-trans-unitlist></app-trans-unitlist>
+<div class="container-fluid wrapper p-3">
+    <div class="row mt-3" *ngIf="!seen">
+        <div class="col-12 col-md-8 mx-auto text-center">
+            <img src="assets/transport.jpg" class="rounded-circle shadow-sm border d-none d-md-block" style="width: 400px; height: 400px;"><br>
+            <img src="assets/transport.jpg" class="rounded-circle shadow-sm border d-block d-md-none mx-auto" style="width: 250px; height: 250px;"><br>
+            <div class="p-3">
+                <span class="text-muted" style="font-size: 15pt;">No transport Means yet <span *ngIf="unit_name"> in {{unit_name}}</span>!!!.Click on each unit to view each transport means</span>
+            </div>
         </div>
-        <div class="col-12 col-md-9">
-            <app-trans-translist></app-trans-translist>
+    </div>
+    <div class="mt-4"  *ngIf="seen">
+        <p class="h1 text-center">
+            <span>{{unit_name | uppercase}} </span>
+            <span>Transport List</span>
+        </p>
+        <div class="row">
+            <div class="col-9">
+                <input type="text" placeholder="Search Transport Means" class="form-control mb-3" [(ngModel)]="transportSearch">
+                <mat-card>
+                    <mat-card-content>
+                        <div class="row mt-2">
+                            <div class="col-3">Transport Name</div>
+                            <div class="col-3">Transport Description</div>
+                            <div class="col-3">Edit</div>
+                            <div class="col-3">Delete</div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <div class="row">
+                    <div class="col-12 mt-2" *ngFor="let transport of transportArray | searchTransport: transportSearch">
+                        <mat-card class="">
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-3">{{transport.transport_name}}</div>
+                                    <!-- <div class="col-3">{{transport.transport_desc}}</div> -->
+                                    <div class="col-3">
+                                        <img src="http://localhost/trafficCounter/backend/uploads/{{transport.transport_img}}" class="w-25" alt="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button mat-raised-button class="text-primary btn-sm" (click)="editTransport(transport.transport_id, transport.transport_name, transport.transport_desc, transport.transport_img)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button mat-raised-button class="text-danger btn-sm" (click)="deleteTransport(transport.transport_id)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <mat-card *ngFor="let unit of unitDetArr" style=" background-color: rgba(4,4,44, 1) !important; color: white">
+                    <div>
+                        <div class="row mx-auto justify-content-end">
+                            <button class="btn btn-sm btn-light">
+                                <span>{{unit.initials}}</span>
+                            </button>
+                        </div>
+                        <p>
+                            <b>Name :</b>
+                            <span class="pl-3">{{unit.name}}</span>
+                        </p>
+                        <p>
+                            <b>Address :</b>
+                            <span class="pl-1">{{unit.address}}</span>
+                        </p>
+                        <p>
+                            <b>Initials :</b>
+                            <span class="pl-1">{{unit.initials}}</span>
+                        </p>
+
+                        <p>
+                            <b>Status :</b>
+                            <span class="pl-1">{{unit.status}}</span>
+                        </p>
+                        
+                        <p>
+                            <b>Count Interval :</b>
+                            <span >{{unit.count_interval}}</span>
+                            <span class="pl-1" *ngIf="unit.count_interval == '60000'">Keep Count per Minute</span>
+                            <span class="pl-1" *ngIf="unit.count_interval == '3600000'">Keep Count per Hour</span>
+                            <span class="pl-1" *ngIf="unit.count_interval == '86400000'">Keep Count per Day</span>
+                        </p>
+                    </div>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>
+

@@ -48,7 +48,7 @@ export class ReportComponent implements OnInit {
   public transPerRange =  [];
   public forTransRange = [];
   public forTransValue = [];
-  public times = ["12:00AM-04:00AM", "04:00AM-08:00AM", "08:00AM-12:00AM", "12:00PM-04:00PM", "04:00PM-08:00PM", "08:00PM-12:00AM"];
+  public times = ["12:00AM-04:00AM", "04:00AM-08:00AM", "08:00AM-12:00PM", "12:00PM-04:00PM", "04:00PM-08:00PM", "08:00PM-12:00AM"];
   public finalTimeArray = [];
 
 
@@ -311,7 +311,7 @@ export class ReportComponent implements OnInit {
         } else if (timeArray[i].holdHour >=4 && timeArray[i].holdHour <=7) {
           timeArray[i].range = "04:00AM-08:00AM";
         } else if (timeArray[i].holdHour >=8 && timeArray[i].holdHour <=11) {
-          timeArray[i].range = "08:00AM-12:00AM";
+          timeArray[i].range = "08:00AM-12:00PM";
         } else if (timeArray[i].holdHour >=12 && timeArray[i].holdHour <=15) {
           timeArray[i].range = "12:00PM-04:00PM";
         } else if (timeArray[i].holdHour >=16 && timeArray[i].holdHour <=19) {

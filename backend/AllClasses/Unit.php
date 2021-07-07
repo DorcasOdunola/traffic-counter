@@ -27,7 +27,12 @@
             $query = "UPDATE unit set name = ?, address = ?, initials = ?, status = ?, count_interval = ? WHERE unit_id = ?";
             $binder = array('ssssss',$unitName, $unitAddress, $unitInitial, $unitStatus, $countInterval, $unit_id);
             return $this->update($query, $binder);
+        }
 
+        public function getUnit($unit_id) {
+            $query = "SELECT * FROM unit WHERE unit_id = ?";
+            $binder = array('i', $unit_id);
+            return $this->selectSome($query, $binder);
         }
     }
 

@@ -1,17 +1,31 @@
-<div class="container-fluid wrapper">
+<div class="container-fluid wrapper p-3">
   <div class="row" *ngIf="!seen">
     <div class="col-3 mx-auto">
       <p class="display-4 text-center">LOADING.....</p>
     </div>
   </div>
-  <div class="row" *ngIf="seen">
-    <div class="col-12 col-md-6 mx-auto">
+  <p class="h2 text-center">USERS LIST</p>
+  <!-- <div class="row" *ngIf="seen">
+    <div class="col-12 col-md-4 float-left">
       <input type="text" class="form-control mt-2" placeholder="Search Staff" [(ngModel)]="userSearch">
     </div>
     <div class="sticky">
       <button mat-raised-button routerLink="/adduser">Add User</button> 
     </div>
-  </div> 
+  </div>  -->
+
+  <div class="row mx-auto justify-content-end" *ngIf="seen">
+    <div class="col-12 col-md-6 border-top-0 mx-auto">
+      <!-- <input type="text" class="form-control mt-2" placeholder="Search Unit" [(ngModel)]="unitSearch"> -->
+    </div>
+    <div class="col-12 col-md-4 border-top-0 mx-auto">
+      <input type="text" class="form-control mt-2" placeholder="Search Staff" [(ngModel)]="userSearch">
+    </div>
+    <div class="col-12 col-md-2 border-top-0 mx-auto p-0">
+      <button mat-raised-button routerLink="/adduser" class="ml-3 ml-md-5 mt-2">Add User</button> 
+    </div>
+ </div>
+
   <div class="row mt-4 p-0">
         <div class="col-12 mb-3" *ngFor="let user of userArray | searchUser:userSearch">
           <mat-card class="bg-white p-0">
@@ -42,10 +56,10 @@
                 </div>
                 <div class="col-12 col-md-2 text-center">
                   <mat-card-actions class="mt-md-3">
-                      <button mat-raised-button  class="text-primary" style="font-size: 12pt;" (click)="editUser(user.user_id, user.surname, user.first_name, user.last_name, user.email, user.address, user.user_status, user.phone_number, user.unit_id)">
+                      <button mat-raised-button  class="" style="font-size: 12pt;" (click)="editUser(user.user_id, user.surname, user.first_name, user.last_name, user.email, user.address, user.user_status, user.phone_number, user.unit_id)">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button mat-raised-button class="text-danger" (click)="deleteUser(user.user_id)" style="font-size: 12pt;"><i class="fas fa-trash-alt"></i></button>
+                      <button mat-raised-button class="" (click)="deleteUser(user.user_id)" style="font-size: 12pt;"><i class="fas fa-trash-alt"></i></button>
                   </mat-card-actions>
                 </div>
               </div>

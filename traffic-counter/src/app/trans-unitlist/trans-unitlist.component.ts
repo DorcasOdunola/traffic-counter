@@ -17,9 +17,9 @@ export class TransUnitlistComponent implements OnInit {
     })
   }
 
-  updateUnitId(unit_id, unit_name) {
-    this.unitService.unitId.next(unit_id);
-    this.unitService.unitName.next(unit_name);
-  }
+  // updateUnitId(unit_id, unit_name) {
+  //   this.unitService.unitId.next(unit_id);
+  //   this.unitService.unitName.next(unit_name);
+  // }
 
 }

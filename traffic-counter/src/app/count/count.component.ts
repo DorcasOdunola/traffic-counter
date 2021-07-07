@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { TransportService } from '../services/transport.service';
 import { DayService } from '../services/day.service';
+import { notEqual } from 'assert';
 
 @Component({
   selector: 'app-count',
@@ -86,7 +87,7 @@ export class CountComponent implements OnInit {
         this.transArray[findIndex].value = report.value
       }
     })
-    console.log(this.transArray);
+    console.log(this.transArray, "transarray");
   }
   getDetails() {
     let date = new Date();
@@ -116,7 +117,6 @@ export class CountComponent implements OnInit {
       this.saveCountArray.push(obj);
     } else {
       let findIndex = this.saveCountArray.findIndex(trans => trans.transport_id == transport_id);
-      console.log(findIndex);
       if (findIndex >= 0) {
         this.saveCountArray[findIndex].value = this.saveCountArray[findIndex].value+=1;
         localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
@@ -126,14 +126,13 @@ export class CountComponent implements OnInit {
         localStorage.setItem("CountArray", JSON.stringify(this.saveCountArray));
       }
     }
-    let getCheck = JSON.parse(localStorage.getItem("CountArray"));
-    getCheck.map(report => {
-      let findIndex = this.transArray.findIndex(trans => trans.transport_id == report.transport_id);
-      if (findIndex >= 0) {
-        this.transArray[findIndex].value = report.value
+    this.transArray.map (trans => {
+      if (trans.transport_id == transport_id) {
+        trans.value = trans.value + 1;
+      } else {
+        trans.value = trans.value;
       }
     })
-    console.log(this.saveCountArray);
   }
 
   decreaseCount(transport_id) {
@@ -154,11 +153,11 @@ export class CountComponent implements OnInit {
     } else {
       return;
     }
-    let getCheck = JSON.parse(localStorage.getItem("CountArray"));
-    getCheck.map(report => {
-      let findIndex = this.transArray.findIndex(trans => trans.transport_id == report.transport_id);
-      if (findIndex >= 0) {
-        this.transArray[findIndex].value = report.value
+    this.transArray.map (trans => {
+      if (trans.transport_id == transport_id) {
+        trans.value = trans.value - 1;
+      } else {
+        trans.value = trans.value;
       }
     })
   }

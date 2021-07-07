@@ -30,8 +30,6 @@ import { UnitListComponent } from './unit-list/unit-list.component';
 import { EditunitDialogComponent } from './editunit-dialog/editunit-dialog.component';
 import { SearchUnitPipe } from './pipes/search-unit.pipe';
 import { TransportListComponent } from './transport-list/transport-list.component';
-import { TransUnitlistComponent } from './trans-unitlist/trans-unitlist.component';
-import { TransTranslistComponent } from './trans-translist/trans-translist.component';
 import { EdittransportDialogComponent } from './edittransport-dialog/edittransport-dialog.component';
 import { SearchTransportPipe } from './pipes/search-transport.pipe';
 import { ResetpassDialogComponent } from './resetpass-dialog/resetpass-dialog.component';
@@ -61,8 +59,6 @@ import { UnitReportComponent } from './unit-report/unit-report.component';
     EditunitDialogComponent,
     SearchUnitPipe,
     TransportListComponent,
-    TransUnitlistComponent,
-    TransTranslistComponent,
     EdittransportDialogComponent,
     SearchTransportPipe,
     ResetpassDialogComponent,

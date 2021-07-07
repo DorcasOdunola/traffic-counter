@@ -20,22 +20,12 @@
         <span><i class="fas fa-users"></i></span>
         <span class="ml-3">Users</span>
       </a>
-    <mat-accordion *ngIf="admin">
-      <mat-expansion-panel style="background-color: transparent !important; box-shadow: none !important; padding: 0% !important;">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <a mat-list-item class="myFont">
-              <span><i class="fas fa-car-side"></i></span>
-              <span class="pl-3">Transport</span>
-            </a>
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <a mat-list-item routerLink="/addtransport" (click)="width < 768 ? drawer.close() : ''" class="pl-4 myFont">Add Transport</a>
-        <a mat-list-item routerLink="/alltransport" (click)="width < 768 ? drawer.close() : ''" class="pl-4 myFont">All Transport</a>
-      </mat-expansion-panel>
-    </mat-accordion>
+
+      <a mat-list-item routerLink="/addtransport" routerLinkActive="active" class="pl-4 myFont">
+        <span><i class="fas fa-car-side"></i></span>
+        <span class="pl-3">Add Transport</span>
+      </a>
+      
       <a mat-list-item routerLink="/count" (click)="width < 768 ? drawer.close() : ''" routerLinkActive="active" class="pl-4 myFont">
         <span><i class="fas fa-plus-circle"></i></span>
         <span class="pl-3">Count</span>

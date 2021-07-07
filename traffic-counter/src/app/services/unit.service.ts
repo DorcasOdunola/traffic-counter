@@ -12,7 +12,7 @@ export class UnitService {
 
   public baseUrl = environment.baseUrl;
   public unitId = new BehaviorSubject(String);
-  public unitName = new BehaviorSubject(String);
+  public unitObj = new BehaviorSubject(Object);
 
   public postUnit(myobj) {
     return this.http.post<any>(`${this.baseUrl}Postunit.php`, myobj)
@@ -33,6 +33,11 @@ export class UnitService {
   public editUnit(unitObj) {
     return this.http.post<any>(`${this.baseUrl}EditUnit.php`, unitObj);
   }
+
+  public getAUnit(unit_id) {
+    return this.http.post<any>(`${this.baseUrl}getUnit.php`, unit_id);
+  }
+
 
   
 }

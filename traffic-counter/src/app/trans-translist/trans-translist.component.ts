@@ -33,14 +33,14 @@ export class TransTranslistComponent implements OnInit {
           this.transportArray = backData;
         } else {
           this.seen = false;
-          this.unitService.unitName.subscribe(data => {
-            console.log(data);
-            if (data == String) {
-              this.unit_name = ""
-            } else {
-              this.unit_name = data;
-            }
-          })
+          // this.unitService.unitName.subscribe(data => {
+          //   console.log(data);
+          //   if (data == String) {
+          //     this.unit_name = ""
+          //   } else {
+          //     this.unit_name = data;
+          //   }
+          // })
         }
       })
     })

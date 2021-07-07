@@ -77,4 +77,8 @@ export class UnitListComponent implements OnInit {
       }
     })
   }
+
+  sendUnitDetails(unit) {
+    this.unitService.unitObj.next(unit)
+  }
 }
